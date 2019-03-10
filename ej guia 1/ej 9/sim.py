@@ -37,12 +37,12 @@ def mySistem(n , x,a,b):
 
 
 t1 = np.arange(30)
-y1=mySistem(t1,myDelta,(5/4),-(25/32))
+y1=mySistem(t1,myU,(5/4),-(25/32))
 
 l = plt.plot(t1, y1, 'ro')
 plt.xlabel('Time')
 plt.ylabel('Y(nT)')
-plt.title('Respuesta al impulso')
+plt.title('Respuesta al escalon')
 plt.setp(l, markersize=10)
 plt.setp(l, markerfacecolor='C0')
 plt.show()
