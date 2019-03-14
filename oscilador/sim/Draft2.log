@@ -1,0 +1,22 @@
+Circuit: * C:\Users\Matias Pierdominici\Documents\GitHub\ASSD_TP_1\oscilador\sim\Draft2.asc
+
+Limiting fall time of source v1 to 1.9984e-016
+Direct Newton iteration for .op point succeeded.
+
+Date: Mon Mar 11 14:42:22 2019
+Total elapsed time: 0.125 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 8627
+traniter = 8600
+tranpoints = 2585
+accept = 2161
+rejected = 424
+matrix size = 13
+fillins = 4
+solver = Normal
+Matrix Compiler1: 1.02 KB object code size  0.3/0.2/[0.0]
+Matrix Compiler2:      90 opcodes  0.2/[0.1]/0.3
+
