@@ -1,4 +1,16 @@
 \documentclass[../../ASSD_TP1_G7.tex]{subfiles}
 \begin{document}
 \chapter*{Oscilador}
+Se dise\~no un oscilador cuya salida sea cuadrada, de frecuencia variable y de duty cycle variable. Ambos parámetros capases de variar independientemente uno de otro.
+\subsection*{Circuito implementado}
+Para lograr la independencia en la variación de frecuencia y duty cycle, se propuso un circuito de dos bloques, uno encargado de la frecuencia y el otro del duty cycle.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/diagBloques.png}
+\caption{Diagrama en bloques del circuito}
+\end{figure}
+El bloque correspondiente al control de la frecuencia es el de la fuente variable de corriente, el capacitor y el schmitt trigger. Como $i_c=\frac{d_v}{d_t}$, donde $i_c$ es la corriente en el capacitor, es constante debido a la fuente de corriente entonces la tension en el capacitor crece lienealmente en el tiempo,$V_c=t \frac{i_c}{C}$. Alcanzado la tension $V_{high}$ del schmitt trigger, su salida pasara a nivel alto y el transistor entrara en saturacion, descargando el capacitor. Cuando la tension el el capacitor alcance la tension $V_{low}$, la salida del schmitt trigger pasara a nivel bajo y la descarga del capacitor se detiene.
+Variando $i_c$ se generan distintas pendientes de la rampa, a mallor pendiente mayor frecuencia. 
+
+
 \end{document}
