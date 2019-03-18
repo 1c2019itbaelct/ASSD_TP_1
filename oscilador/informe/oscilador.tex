@@ -19,6 +19,48 @@ El modulo consta de dos partes:
   \item Modulo para descargar el capacitor
 \end{itemize}
 
+La fuente de corriente implementada es la de la figura \ref{fig:fuenteCorriente}. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.32\textwidth]{figures/fCorriente.png}
+\caption{Fuente de corriente implementada}\label{fig:fuenteCorriente}
+\end{figure}
+Recorriendo la malla de entrada se obtiene la siguiente ecuación para la corriente de base del transistor
+\begin{equation}
+i_b=\frac{V_{cc}-V_{cc}\frac{R_2}{R_1 + R_2}-V_{be}}{(\beta + 1)(R_3 + R_4)}
+\end{equation}
+Sabiendo que $i_c=\beta i_b$ entonces:
+\begin{equation}
+i_c= \frac{\beta}{\beta + 1} \left( V_{cc} \frac{R_1}{R_1 + R_2} -V_{be} \right) \frac{1}{(R_3 + R_4)} \label{eq:ic}
+\end{equation}
+Llamando 
+\begin{equation}
+K=\frac{\beta}{\beta + 1} \left( V_{cc} \frac{R_1}{R_1 + R_2} -V_{be} \right)
+\end{equation}
+Reemplazando $K$ en \ref{eq:ic}:
+\begin{equation}
+i_c=\frac{K}{R_3 + R_4} \label{eq:icfin}
+\end{equation}
+
+Como la corriente en el capacitor es constante entonces
+\begin{equation}
+V_c=i_c t \label{eq:vc}
+\end{equation}
+
+Reemplazando la ecuación \ref{eq:icfin} en \ref{eq:vc} se obtiene la expresión final
+\begin{equation}
+V_c=\frac{K}{R_3 + R_4} t 
+\end{equation}
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
