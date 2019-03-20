@@ -1,0 +1,15 @@
+scope_12: 1M2, 3M, 100p
+scope_13: 1M2, 2M4, 100p
+scope_14: 8k3, 20k, 100p
+scope_15: scope_14 zoom a la transicion hold->sample
+scope_16: png de scope_15
+scope_17: 8k3, 24k9, 100n
+scope_19: 8k3, 20k, 100n
+scope_20: 1M2, 2M4, 100n
+scope_21: 1M2, 3M, 100n
+
+
+scope_22: 1M2, 2M4, 100p
+scope_23: 1M2, 3M, 100p
+scope_24: 8k3, 20k, 100p
+scope_25: scope_24 zoom a la transicion hold->sample
