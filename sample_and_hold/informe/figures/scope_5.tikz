@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel = Tiempo (s),
+	ylabel = Tensi\'on (V),
+	width = \textwidth, 
+	cycle list name = color list,
+	ytick = {-4,...,5}]
+\addplot table [x=x-axis, y=1, col sep=comma] {../simulacion/scope_5.csv};
+\addplot table [x=x-axis, y=2, col sep=comma] {../simulacion/scope_5.csv};
+\addplot table [x=x-axis, y=3, col sep=comma] {../simulacion/scope_5.csv};
+
+\legend{SCSH, Input, Output}
+\end{axis}
+\end{tikzpicture}
