@@ -22,7 +22,7 @@ El modulo consta de dos partes:
 La fuente de corriente implementada es la de la figura \ref{fig:fuenteCorriente}. 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.32\textwidth]{figures/fCorriente.png}
+\includegraphics[width=0.25\textwidth]{figures/fCorriente.png}
 \caption{Fuente de corriente implementada}\label{fig:fuenteCorriente}
 \end{figure}
 Recorriendo la malla de entrada se obtiene la siguiente ecuación para la corriente de base del transistor
@@ -99,10 +99,23 @@ V_{ref}=Vcc \frac{R_ck + Rb}{R_a + R_c + R_b}
 \end{equation}
 Donde $k$ es una constante cuyo valor varia entre 0 y 1, representando la posición del preset. El objetivo de las impedancias $R_a$ y $R_b$ es limitar el valor máximo y mínimo de $V_{ref}$. 
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{figures/r2sq.png}
+\caption{Ejemplo de funcionamiento}\label{fig:ej}
+\end{figure}
+
+La figura \ref{fig:ej}, muestra el funcionamiento del comparador para variar el duty cycle. Si $V_{ref}$ aumenta el tiempo el tiempo que la se\~al se encuentra en el nivel bajo, es decir el duty cycle disminuye. Entonces variando la $V_{ref}$ se logra controla del duty cycle. 
+\par Conociendo la tension máxima de la rampa se puede hallar la formula del duty cycle($DC$):
+\begin{equation}
+DC=\left[ 1 - \frac{Vcc \frac{R_ck + Rb}{R_a + R_c + R_b}}{V_{max}} \right] 100
+\end{equation}
+
+\subsubsection*{Elección de componentes}
 
 
-
-
+\subsection*{Características del oscilador}
+\subsection*{Consideraciones al utilizar se\~nales analógicas y digitales en un mismo circuito }
 
 
 
