@@ -52,7 +52,7 @@ Reemplazando la ecuación \ref{eq:icfin} en \ref{eq:vc} se obtiene la expresión
 V_c=\frac{K}{R_3 + R_4} t 
 \end{equation}
 
-\par El modulo encargado de la descarga del capacitor, se implemento con un LM555, debido a que en un mismo integrado se encuentra el scmitt trigger y el transistor. \todo{no me gusta la gustificacion}
+\par El modulo encargado de la descarga del capacitor, se implemento con un LM555, debido a que en un mismo integrado se encuentra el schmitt trigger y el transistor. \todo{no me gusta la gustificacion}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/descargaC.png}
@@ -75,9 +75,9 @@ $\frac{1}{3}V_{cc}<V_c$ & 0 \\ \hline
 
 \end{center}
 \end{table}
-El comportamiento idicado en la tabla corresponde al de un schmitt trigger.
+El comportamiento indicado en la tabla corresponde al de un schmitt trigger.
 
-\par Juntando ambos modulos ya mencionados se obtiene un circuito que genera un diente de cierra a frecuencia variable dependiendo de a tension de entrada y de la resistencia variable.
+\par Juntando ambos módulos ya mencionados se obtiene un circuito que genera un diente de cierra a frecuencia variable dependiendo de a tension de entrada y de la resistencia variable.
 \par Finalmente a partir de las ecuaciones previamente desarrolladas y de los niveles de tension $V_{high}$ y $V_{low}$ se obtuvo la expresión de la frecuencia del circuito:
 
 \begin{equation}
@@ -85,8 +85,19 @@ f=\frac{K}{\frac{1}{3}V_{cc} (R_3+R_4) C}
 \end{equation}
 
 \subsubsection*{Implementación del modulo de control de duty cicle}
+\par El núcleo de este modulo es un comparador, en este caso se utilizo un LM311. La salida del comparador es open collector, por ende hay que incluir en el circuito una resistencia de pull up.
+\par 
 
-
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{figures/comp.png}
+\caption{Circuito del modulo de control de duty cicle}\label{fig:comp}
+\end{figure}
+El objetivo de las resistencias $R_b$ $R_c$ y $R_d$, es generar una tension de referencia para el comparador.
+\begin{equation}
+V_{ref}=Vcc \frac{R_ck + Rb}{R_a + R_c + R_b}
+\end{equation}
+Donde $k$ es una constante cuyo valor varia entre 0 y 1, representando la posición del preset. El objetivo de las impedancias $R_a$ y $R_b$ es limitar el valor máximo y mínimo de $V_{ref}$. 
 
 
 
