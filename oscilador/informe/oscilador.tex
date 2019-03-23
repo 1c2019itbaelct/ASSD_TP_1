@@ -22,7 +22,7 @@ El modulo consta de dos partes:
 La fuente de corriente implementada es la de la figura \ref{fig:fuenteCorriente}. 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.32\textwidth]{figures/fCorriente.png}
+\includegraphics[width=0.25\textwidth]{figures/fCorriente.png}
 \caption{Fuente de corriente implementada}\label{fig:fuenteCorriente}
 \end{figure}
 Recorriendo la malla de entrada se obtiene la siguiente ecuación para la corriente de base del transistor
@@ -52,7 +52,7 @@ Reemplazando la ecuación \ref{eq:icfin} en \ref{eq:vc} se obtiene la expresión
 V_c=\frac{K}{R_3 + R_4} t 
 \end{equation}
 
-\par El modulo encargado de la descarga del capacitor, se implemento con un LM555, debido a que en un mismo integrado se encuentra el scmitt trigger y el transistor. \todo{no me gusta la gustificacion}
+\par El modulo encargado de la descarga del capacitor, se implemento con un LM555, debido a que en un mismo integrado se encuentra el schmitt trigger y el transistor. \todo{no me gusta la gustificacion}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/descargaC.png}
@@ -75,9 +75,9 @@ $\frac{1}{3}V_{cc}<V_c$ & 0 \\ \hline
 
 \end{center}
 \end{table}
-El comportamiento idicado en la tabla corresponde al de un schmitt trigger.
+El comportamiento indicado en la tabla corresponde al de un schmitt trigger.
 
-\par Juntando ambos modulos ya mencionados se obtiene un circuito que genera un diente de cierra a frecuencia variable dependiendo de a tension de entrada y de la resistencia variable.
+\par Juntando ambos módulos ya mencionados se obtiene un circuito que genera un diente de cierra a frecuencia variable dependiendo de a tension de entrada y de la resistencia variable.
 \par Finalmente a partir de las ecuaciones previamente desarrolladas y de los niveles de tension $V_{high}$ y $V_{low}$ se obtuvo la expresión de la frecuencia del circuito:
 
 \begin{equation}
@@ -85,11 +85,57 @@ f=\frac{K}{\frac{1}{3}V_{cc} (R_3+R_4) C}
 \end{equation}
 
 \subsubsection*{Implementación del modulo de control de duty cicle}
+\par El núcleo de este modulo es un comparador, en este caso se utilizo un LM311. La salida del comparador es open collector, por ende hay que incluir en el circuito una resistencia de pull up.
+\par 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{figures/comp.png}
+\caption{Circuito del modulo de control de duty cicle}\label{fig:comp}
+\end{figure}
+El objetivo de las resistencias $R_b$ $R_c$ y $R_d$, es generar una tension de referencia para el comparador.
+\begin{equation}
+V_{ref}=Vcc \frac{R_ck + Rb}{R_a + R_c + R_b}
+\end{equation}
+Donde $k$ es una constante cuyo valor varia entre 0 y 1, representando la posición del preset. El objetivo de las impedancias $R_a$ y $R_b$ es limitar el valor máximo y mínimo de $V_{ref}$. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{figures/r2sq.png}
+\caption{Ejemplo de funcionamiento}\label{fig:ej}
+\end{figure}
+
+La figura \ref{fig:ej}, muestra el funcionamiento del comparador para variar el duty cycle. Si $V_{ref}$ aumenta el tiempo el tiempo que la se\~al se encuentra en el nivel bajo, es decir el duty cycle disminuye. Entonces variando la $V_{ref}$ se logra controla del duty cycle. 
+\par Conociendo la tension máxima de la rampa se puede hallar la formula del duty cycle($DC$):
+\begin{equation}
+DC=\left[ 1 - \frac{Vcc \frac{R_ck + Rb}{R_a + R_c + R_b}}{V_{max}} \right] 100
+\end{equation}
+
+\subsubsection*{Elección de componentes}
 
 
+\subsection*{Características del oscilador}
+\subsection*{Consideraciones al utilizar se\~nales analógicas y digitales en un mismo circuito }
+\par En los circuitos donde hay se\~nales analógicas y digitales mezcladas hay que tener especial consideración en la influencia de las se\~nales digitales en las analógicas. Esto se debe a que en los circuitos digitales existen umbrales para discernir el estado de una se\~nal. 
+\par Los principales efectos que se pueden manifestar son\footnote{Grounding in mixed-signal systems demystified, Part 1. (2019). [ebook] Disponible en: http://www.ti.com/lit/an/slyt499/slyt499.pdf [Accedido 23 Mar. 2019].}:
+\begin{itemize}
+  \item Perdida de referencia a tierra 
+  \item Se\~nales que se copian a otras pistas 
 
+\end{itemize}
 
-
+\par El fenómeno de la copia de se\~nales a pistas cercanas, se debe a las capacidades parásitas entre las pistas. Para evitarlo entre dichas  pistas tiene que haber una pista con masa.
+\subsubsection*{Perdida de referencia a tierra}
+ En circuitos donde hallan se\~nales cuadradas, en el momento del flanco positivo de la señal se produce un pico de corriente, uno de los posibles caminos por donde la corriente vuelve a la fuente es por tierra. Supongamos que en una misma pista tiene conectada la tierra de un comparador y la referencia a cero volt de un circuito analógico. En el momento que la salida del comparador pasa de estado bajo a alto se produce un pico de corriente, y la resistencia considerada despreciable en la pista de masa deja de serlo, entonces se produce una caída de tension sobre esa pista y la referencia del circuito analógico se pierde. 
+ \par Dos posibles opciones para minimizar este efecto son
+ \footnote{Grounding in mixed-signal systems demystified, Part 2. (2019). [ebook] Disponible en: http://www.ti.com/lit/an/slyt512/slyt512.pdf [Accedido 23 Mar. 2019].}:
+ \begin{itemize}
+  \item Pistas gruesas y cortas
+  \item Planos de masa 
+\end{itemize}
+Ambas soluciones implican separar las masas de los circuitos analógicos de los digitales.
+En vez de tener un único plano de masa para toda la placa, separarlo en plano de masa para el circuito digital y para el circuito analógico, y unirlos en un único punto. También se pueden agregar inductores entre los planos de masa, permitiendo que las bajas frecuencias pasen y las altas no.
+\par Otra solución posible es utilizar una topologia estrella para la coneccion de las masas (todas a un mismo punto), esta solucion dificulta el ruteo. Una variación de este método es no conectar por separado las masas del circuito analógico del digital y usar pistas anchas. De esta manera se reduce la impedancia de las pistas, minimizando la caída de tension en ella.
 
 
 
