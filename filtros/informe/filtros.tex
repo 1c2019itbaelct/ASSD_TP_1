@@ -68,11 +68,14 @@ cumplir el criterio de Nyquist-Shannon y que pueda llegar a poseer
 nuestra señal. Por ende, la frecuencia de corte de nuestro filtro
 pasabajos queda conformada de la siguiente manera: $f_{c}=\frac{f_{s}}{2}$.
 
-\begin{figure}[H]
 
-\caption{Efecto que produce el aliasing en una señal.}
+\begin{wrapfigure}{r}{0.5\columnwidth}%
+\begin{centering}
+\includegraphics[scale=0.6]{Imagenes/aliasing}\caption{Efecto de aliasing de una señal.}
+\par\end{centering}
+\end{wrapfigure}%
 
-\end{figure}
+
 \section{Filtro Recuperador}
 
 El otro filtro que debemos realizar es el filtro Recuperador, encargado
@@ -104,9 +107,11 @@ esos efectos como despreciables.
 
 \begin{figure}[H]
 
-\caption{Algo del filtro recuperador.}
-
+\begin{centering}
+\includegraphics[scale=0.6]{Imagenes/recuperador.PNG}\caption{Filtro recuperador.}
+\par\end{centering}
 \end{figure}
+
 
 
 \section{Elección de parámetros del filtro}
@@ -149,8 +154,12 @@ señal para poder recuperarla.
 
 \begin{figure}[H]
 
-\caption{Forma de una función con distinto número de armónicos.}
-
+\begin{centering}
+\includegraphics[scale=0.25]{Imagenes/armonicos1a4}\includegraphics[scale=0.25]{Imagenes/armonicos4a8}
+\par\end{centering}
+\begin{centering}
+\includegraphics[scale=0.25]{Imagenes/20armonicos}\includegraphics[scale=0.25]{Imagenes/100armonicos}\caption{Forma de una función con distinto número de armónicos.\label{fig:Forma-de-una}}
+\par\end{centering}
 \end{figure}
 
 El segundo problema que se esgrime, es el hecho de la frecuencia de
@@ -225,10 +234,11 @@ Etapas & Frecuencia de corte del filtro {[}Hz{]} & Q\\
 \par\end{centering}
 \end{table}
 
+
 \begin{figure}[H]
-
-\caption{Etapas superpuestas.}
-
+\begin{centering}
+\includegraphics[scale=0.6]{Imagenes/etapas_superpuestas.PNG}\includegraphics[scale=0.7]{Imagenes/poles_constelation.PNG}\caption{Etapas superpuestas.}
+\par\end{centering}
 \end{figure}
 
 
@@ -246,11 +256,12 @@ calibración extrema.
 
 Para implementar la topología Rauch de tipo pasabajos, se implementó
 la siguiente planilla:
-
 \begin{figure}[H]
-\caption{Plantilla de la celda pasabajos Rauch.}
-
+\begin{centering}
+\includegraphics[scale=0.7]{Imagenes/rauch.PNG}\caption{Plantilla de la celda pasabajos Rauch.}
+\par\end{centering}
 \end{figure}
+
 
 Para esta plantilla, las ecuaciones de diseño utilizadas fueron las
 siguientes:
@@ -267,7 +278,7 @@ Para implementar la topología Sallen-Key de tipo pasabajos, se implementó
 la siguiente planilla:
 
 \begin{figure}[H]
-\caption{Plantilla de la celda pasabajos Sallen-Key.}
+\centering{}\includegraphics{Imagenes/260px-Sallen-Key_Lowpass_General\lyxdot svg}\caption{Plantilla de la celda pasabajos Sallen-Key.}
 \end{figure}
 
 Las ecuaciones del filtro pertinente a la misma son:
@@ -297,11 +308,13 @@ por separado tanto al 10\% como al 5\% y al 1\%. Podemos observar
 los resultados en los siguientes gráficos:
 
 \begin{figure}[H]
-
-\caption{De izq a der: C y R al 10\%, C al 1\% y R al 10\%, C al 10\% y R al
+\includegraphics[scale=0.28]{Imagenes/CyR_al_5%.PNG}\includegraphics[scale=0.28]{Imagenes/C_al_1&_yR_al_5%.PNG}
+\begin{centering}
+\includegraphics[scale=0.3]{Imagenes/CyR_al_1%.PNG}\caption{De izq a der: C y R al 10\%, C al 1\% y R al 10\%, C al 10\% y R al
 1\%, C y R al 1\%.}
-
+\par\end{centering}
 \end{figure}
+
 
 Gracias a este análisis, pudimos concluir que si bien los componentes
 al 10\% nos arrojan una excesiva dispersión, los componentes que más
