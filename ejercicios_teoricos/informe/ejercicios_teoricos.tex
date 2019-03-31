@@ -2,6 +2,76 @@
 \begin{document}
 \chapter*{Ejercicios te\'oricos}
 
+
+\section*{Ejercicio 9.1}
+Llamando a $x(n)=X(nT)$ y $y(n)=Y(nT)$, se obtiene la siguiente ecuación en diferencias. 
+\begin{equation}
+y(n)=\frac{1}{2} x(n-2) + \alpha y(n-1) + \beta y(n-2)  
+\end{equation}
+
+\subsection*{a}
+Siendo $\alpha = 1$ y $\beta = -\frac{1}{2}$ se simulo la respuesta al escalón y al impulso.
+
+
+\begin{figure}[H]
+\centering
+\subcaptionbox{Respuesta al escalón\label{f:ejaesc}}
+{\includegraphics[width=0.45\textwidth]{figures/a-escalon.png}}
+\subcaptionbox{Respuesta al impulso\label{f:ejaimp}}
+{\includegraphics[width=0.45\textwidth]{figures/a-impulso.png}}
+\caption{Gráficos de la simulación de las respuesta al impulso y al escalón}\label{f:eja}
+\end{figure}
+
+
+
+De la simulación se obtuvo que la frecuencia de oscilación en función de $nT$ es $f= \frac{1}{8}$.
+\subsection*{b}
+Siendo $\alpha = \frac{1}{2}$ y $\beta = -\frac{1}{8}$ se simulo la respuesta al escalón y al impulso.
+
+
+\begin{figure}[H]
+\centering
+\subcaptionbox{Respuesta al escalón\label{f:ejbesc}}
+{\includegraphics[width=0.45\textwidth]{figures/b-escalon.png}}
+\subcaptionbox{Respuesta al impulso\label{f:ejbimp}}
+{\includegraphics[width=0.45\textwidth]{figures/b-impulso.png}}
+\caption{Gráficos de la simulación de las respuesta al impulso y al escalón}\label{f:ejb}
+\end{figure}
+
+
+\subsection*{c}
+Siendo $\alpha = 1$ y $\beta = -\frac{1}{2}$ se simulo la respuesta al escalón y al impulso.
+
+
+\begin{figure}[H]
+\centering
+\subcaptionbox{Respuesta al escalón\label{f:ejcesc}}
+{\includegraphics[width=0.45\textwidth]{figures/c-escalon.png}}
+\subcaptionbox{Respuesta al impulso\label{f:ejcimp}}
+{\includegraphics[width=0.45\textwidth]{figures/c-impulso.png}}
+\caption{Gráficos de la simulación de las respuesta al impulso y al escalón}\label{f:ejc}
+\end{figure}
+
+
+De la simulación se obtuvo que la frecuencia de oscilación en función de $nT$ es $f= \frac{1}{7}$
+\subsection*{Respuesta en frecuencia}
+Para hallar el modulo de la respuesta en frecuencia, se ingreso al sistema con un seno de amplitud unitario y un tiempo mayor al del establecimiento, se midió el máximo de la se\~nal de entrada. Dicho proceso se repitió para distintas frecuencias entre 0 y $\frac{w_s}{2} $
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=0.9\textwidth]{figures/rtaFrec.png}
+  \caption{Modulo de la respuesta en frecuencia simulada}
+  \label{fig:rtaFrecFin}
+\end{figure}
+\subsection{Análisis de resultados}
+Como se observa las respuesta del sistema, con los parámetros de los casos $a$ y $c$, corresponde a un sistema subamortiguado. En el caso $a$ corresponde a un sistema subamortiguado con un factor de amortiguamiento mayor que el caso $c$.
+\par El caso de $c$ corresponde a un sistema críticamente amortiguado.
+
+
+
+
+
+
 \section{Retardo de grupo}
 El sistema propuesto: $y(n)=x(n)+2x(n-1)+3x(n-2)+4x(n-3)+3x(n-4)+2x(n-5)+x(n-6)$  esta representado por una ecuaci\'{o}n de diferencias lineales con coeficientes constantes por lo que fácilmente se determina que el mismo es un sistema LTI causal. 
 
@@ -61,6 +131,7 @@ $$\tau_g =2.\frac{(1+cos(\omega))^2}{(1+cos(\omega))^2+sen^2(\omega)}.\frac{1+co
 $$\tau_g =2.\frac{1+cos(\omega)}{2+2cos(\omega)}+4.\frac{1+cos(2\omega)}{2+2cos(2\omega)}=1+2=3$$
 
 Queda demostrado que el retardo de grupo del sistema propuesto es constante, es decir, la fase es lineal respecto a la frecuencia. 
+
 
 
 \end{document}
