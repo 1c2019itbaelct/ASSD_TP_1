@@ -1,5 +1,5 @@
 \documentclass[../../ASSD_TP1_G7.tex]{subfiles}
-
+\usepackage{wrapfig}
 \begin{document}
 \chapter*{Filtro Antialiasing y Flitro Recuperador}
 En el presente punto, se desglosará a continuación el proceso de análisis
@@ -318,12 +318,14 @@ los resultados en los siguientes gráficos:
 \begin{figure}[H]
 \begin{center}
 
-\includegraphics[scale=0.27]{Imagenes/CyR_al_5.PNG}\includegraphics[scale=0.27]{Imagenes/C_al_1_yR_al_5.PNG}
+\includegraphics[scale=0.27]{Imagenes/CyR_al_5.PNG}\includegraphics[scale=0.27]{Imagenes/CyR_al_1.PNG}
 
-\includegraphics[scale=0.27]{Imagenes/CyR_al_1.PNG}
+
+\includegraphics[scale=0.27]{Imagenes/C_al_1_yR_al_5.PNG}
 
 \par\end{center}
-\caption{De izq a der: C y R al 10\%, C al 1\% y R al 10\%, C al 10\% y R al 1\%, C y R al 1\%}
+\caption{De izq a der: C y R al 10\%, C y R al 1\%, C al 10\% y R al 1\%}
+\label{fig:montecarlo}
 \end{figure}
 
 
@@ -337,9 +339,22 @@ va a estar dentro de nuestra banda de tolerancia.
 \subsection{Mediciones}
 Una vez realizada la placa final, se procedió a realizar las mediciones pertinentes sobre el filtro en condiciones aisladas (es decir sin que otras etapas de la placa lo carguen). Se obtuvieron los siguientes resultados:
 
-\begin{figure}
-
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{Imagenes/bode.png}
+\end{center}
+\caption{En rojo, las mediciones obtenidas, en azul el filtro simulado.}
 \end{figure}
+
+Como podemos observar en la imagen, el filtro construido resultante no se comporta en absoluto a como el filtro ideal simulado, y si volvemos a mirar el análisis de montecarlo en la figura \ref{fig:montecarlo} vemos que tampoco entra en el rango predecido por dicho análisis. A pesar de tener presets para poder calibrar el filtro, no fue posible lograr una mejor medición que la que se muestra, por lo que vamos a proceder a enumerar las consecuencias de tener un filtro de dichas características:
+\begin{itemize}
+\item Las frecuencias que ingresen al filtro y que estén cercanas a la frecuencia de corte del mismo van a sufrir una amplificación haciendo que probablemente saturen en esa frecuencia.
+
+
+\item Esa ganancia va a insertar una respuesta transitoria sobre mi señal de aproximadamente la frecuencia del filtro.
+
+\item Los distintos armónicos que pasen por el filtro van a sufrir distintos desfasajes producto de la construcción de dicho filtro.
+\end{itemize}
 
 
 \end{document}
