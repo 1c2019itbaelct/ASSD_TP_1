@@ -14,6 +14,7 @@
 \subfile{introduccion.tex}
 \let\input=\oldinput
 
+\input
 
 \let\oldinput=\input
 \def\input#1{\oldinput{oscilador/informe/#1}}	
@@ -23,7 +24,7 @@
 
 \let\oldinput=\input
 \def\input#1{\oldinput{filtros/informe/#1}}	
-\subfile{filtros.tex}
+%\subfile{filtros.tex}
 \let\input=\oldinput
 
 
@@ -34,6 +35,7 @@
 
 
 \let\oldinput=\input
+\renewcommand{\pgfpath}[0]{sample_and_hold/informe/}%will not be read by subfiles
 \def\input#1{\oldinput{sample_and_hold/informe/#1}}	
 \subfile{sample_and_hold.tex}
 \let\input=\oldinput

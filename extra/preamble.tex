@@ -81,6 +81,10 @@
 %Para hacer plots directamente desde latex
 \usepackage{pgfplots}
 
+%Path que usan los subfiles para buscar los archivos que se incluyen en los plots de pgfplots.
+%Si se compila desde el main, se redefine. Si se compila desde un subfile, no se redefine.
+%Es alto parche
+\newcommand{\pgfpath}[0]{}
 
 % separacion correcta de palabras en silabas
 \hyphenation{o-pe-ra-cio-nal}
