@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel = Tiempo (s),
+	ylabel = Tensi\'on (V),
+	width = \textwidth, 
+	cycle list name = color list,
+	ytick = {-5,...,6},
+%	grid=major,
+	legend style={legend pos=south east}
+	]
+
+	\addplot table [x = time, y = V(signal_in), col sep=tab] {\pgfpath../simulacion/syh_8k3_20k_100n_sim.txt};
+	\addplot table [x = time, y = V(signal_out), col sep=tab] {\pgfpath../simulacion/syh_8k3_20k_100n_sim.txt};
+	\addplot table [x = time, y = V(logic), col sep=tab] {\pgfpath../simulacion/syh_8k3_20k_100n_sim.txt};
+	\addplot table [x = time, y = V(vc), col sep=tab] {\pgfpath../simulacion/syh_8k3_20k_100n_sim.txt};
+
+\legend{Se\~nal de entrada, Se\~nal de salida, SCSH, Tensi\'on en $C_H$}
+\end{axis}
+\end{tikzpicture}

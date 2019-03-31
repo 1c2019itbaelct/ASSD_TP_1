@@ -50,7 +50,7 @@ Al igual que $V_{OS}$, el hold step $V_{HS}$ tiene que ser menor que $\frac{1}{2
 	
 	\item\textbf{Acquisition time}
 	
-Como la resolucion es de 8bits, el error debe ser menor que $\frac{1}{2}$LSB = $\frac{FS}{2^9} = FS \cdot 0.02\% $. Por lo tanto, se utiliza la curva de 0.1\% de la hoja de datos (figura \ref{fig:syh_acquisition_time_datasheet}).
+Como la resolucion es de 8bits, el error debe ser menor que $\frac{1}{2}$LSB = $\frac{FS}{2^9} = FS \cdot 0.02\% $. Por lo tanto, se utiliza la curva de 0.01\% de la hoja de datos (figura \ref{fig:syh_acquisition_time_datasheet}).
 
 Frecuencia de sampleo: $f_s = 100kHZ $ \\
 Periodo de sampleo: $T_s = \frac{1}{f_s} = 10\mu s$
@@ -102,7 +102,47 @@ Se elige un duty cycle de 50\%, lo cual deja $5 \mu s$ para el modo \textit{samp
 			\centering
 			\includegraphics[width = 0.5\textwidth]{figures/offset_adjust_schematic.png}
 			\caption{Circuito de correcci\'on de \textit{hold step} y de tensi\'on de offset $V_{OS}$.}
-			\label{fig:syh_acquisition_time_datasheet}
+			\label{fig:syh_offset_correction_datasheet}
 		\end{figure}	
+		
+
+\section{Mediciones}
+
+\begin{figure}[H]
+	\centering
+	\input{figures/syh_1M2_2M4_100n.tikz}
+	\caption{Medici\'on \textit{sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100nF$.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{figures/syh_8k3_20k_100n.tikz}
+	\caption{Medici\'on \textit{sample and hold}. $f_{entrada} = 8K3$, $f_{SCSH}=20K$, $C_H = 100nF$.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{figures/syh_8k3_20k_100n_sim.tikz}
+	\caption{Simulaci\'on \textit{sample and hold}. $f_{entrada} = 8K3$, $f_{SCSH}=20K$, $C_H = 100nF$.}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\input{figures/syh_1M2_2M4_100p.tikz}
+	\caption{Medici\'on \textit{sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100pF$.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{figures/syh_8k3_20k_100p.tikz}
+	\caption{Medici\'on \textit{sample and hold}. $f_{entrada} = 8K3$, $f_{SCSH}=20K$, $C_H = 100pF$.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{figures/syh_8k3_20k_100p_zoom.tikz}
+	\caption{Detalle de la medici\'on \textit{sample and hold}. $f_{entrada} = 8K3$, $f_{SCSH}=20K$, $C_H = 100pF$.}
+\end{figure}
 
 \end{document}

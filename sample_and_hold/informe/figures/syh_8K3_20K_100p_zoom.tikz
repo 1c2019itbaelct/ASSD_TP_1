@@ -5,9 +5,9 @@
 	width = \textwidth, 
 	cycle list name = color list,
 	ytick = {-4,...,5}]
-\addplot table [x=x-axis, y=1, col sep=comma] {../simulacion/scope_25.csv};
-\addplot table [x=x-axis, y=2, col sep=comma] {../simulacion/scope_25.csv};
-\addplot table [x=x-axis, y=3, col sep=comma] {../simulacion/scope_25.csv};
+\addplot table [x=x-axis, y=1, col sep=comma] {\pgfpath../simulacion/scope_25.csv};
+\addplot table [x=x-axis, y=2, col sep=comma] {\pgfpath../simulacion/scope_25.csv};
+\addplot table [x=x-axis, y=3, col sep=comma] {\pgfpath../simulacion/scope_25.csv};
 
 \legend{SCSH, Input, Output}
 \end{axis}
