@@ -1,4 +1,5 @@
 \documentclass[../../ASSD_TP1_G7.tex]{subfiles}
+
 \begin{document}
 \chapter*{Filtro Antialiasing y Flitro Recuperador}
 En el presente punto, se desglosará a continuación el proceso de análisis
@@ -30,7 +31,7 @@ De esta forma, $x_{a}(t)$ queda expresada como:
 \textit{\Large{}$x_{a}(t)\sim\sum_{n=-\infty}^{\infty}x_{a}(\frac{n}{f_{s}})\cdot g(t-\frac{n}{f_{s}})$}{\Large\par}
 \par\end{center}
 
-Ahora, el problema que ocaciona el no cumplir con la frecuencia de
+Ahora, el problema que ocasiona el no cumplir con la frecuencia de
 sampleo mayor al valor indicado previamente, queda visible cuando
 se realiza el análisis de Fourier correspondiente:
 
@@ -43,7 +44,7 @@ de sampleo
 \textit{\Large{}$\delta_{T_{s}}(t)=\sum_{n=-\infty}^{\infty}\delta(t-nT_{s})\rightarrow\tilde{x}(t)=x(t)\cdot\delta_{T_{s}}(t)$}{\Large\par}
 \par\end{center}
 
-si ahora le aplicamos la transformada de fourier a dicha señal, obtendremos
+si ahora le aplicamos la transformada de Fourier a dicha señal, obtendremos
 lo siguiente:
 \begin{center}
 {\Large{}$\mathcal{F}\{\tilde{x}(t)\}(f)=X(f)*\delta_{T_{s}}(f)$}{\Large\par}
@@ -58,8 +59,8 @@ Si analizamos la función resultante en el espectro de manera gráfica,
 podemos llegar a la conclusión de que el espectro que aporta la señal
 $x(t)$, se va a ver repetido a lo largo de cada $\delta$ perteneciente
 a $\delta_{T_{s}}(t)$. Si la frecuencia $f_{s}$ aumenta, la separación
-entre $\delta$ disminuye, lo que produce una superpocición de espectros.
-A esa superpocición de espectros se la conoce como aliasing y es lo
+entre $\delta$ disminuye, lo que produce una superposición de espectros.
+A esa superposición de espectros se la conoce como aliasing y es lo
 que se desea evitar.
 
 Como la frecuencia de muestreo $f_{s}$ es fija, la función del filtro
@@ -75,16 +76,18 @@ pasabajos queda conformada de la siguiente manera: $f_{c}=\frac{f_{s}}{2}$.
 \par\end{centering}
 \end{wrapfigure}%
 
+\newpage
+
 
 \section{Filtro Recuperador}
 
 El otro filtro que debemos realizar es el filtro Recuperador, encargado
 de seleccionar el espectro que corresponde a la señal digitalizada
-que quiero recuperar. En el análisis previo que se hizo de fourier,
+que quiero recuperar. En el análisis previo que se hizo de Fourier,
 llegamos a que el espectro de la función digital se repetía a lo largo
 del espacio cada $f=nf_{s}$. El problema de esto, es que esa periodicidad
 del espectro de mi señal no se corresponde con el de la señal original,
-por lo que para poder realizar la operación excitosa, debo ``seleccionar''
+por lo que para poder realizar la operación exitosa, debo ``seleccionar''
 el espectro que corresponde. Aquí es donde se hace evidente la función
 de este filtro, pues es el encargado que los otros espectros que no
 le corresponden a mi señal original se vean atenuados. 
@@ -95,14 +98,14 @@ el espectro que posee mi señal es el mismo en ambas sino que también
 producen el mismo efecto en el espectro de la misma, por lo que es
 posible utilizar el mismo filtro para ambas funciones en particular
 (cabe destacar que se realizaron dos filtros físicos por separado
-para cada etapa descripta). 
+para cada etapa descrita). 
 
 Por último, destacamos que si bien ambos filtros poseen ganancia unitaria,
 para el caso del filtro recuperador es posible usar uno con ganancias
 distintas a ella producto de los efectos que se producen cuando uno
-muestrea la señal de manera no ideal, lo que ocaciona que la recuperación
-tenga un proceso distinto y pueda llegar a manifestar distorciones
-en terminos de ganancia; pero para este caso en particular se consideraron
+muestrea la señal de manera no ideal, lo que ocasiona que la recuperación
+tenga un proceso distinto y pueda llegar a manifestar distorsiones
+en términos de ganancia; pero para este caso en particular se consideraron
 esos efectos como despreciables.
 
 \begin{figure}[H]
@@ -155,10 +158,10 @@ señal para poder recuperarla.
 \begin{figure}[H]
 
 \begin{centering}
-\includegraphics[scale=0.25]{Imagenes/armonicos1a4}\includegraphics[scale=0.25]{Imagenes/armonicos4a8}
+\includegraphics[scale=0.24]{Imagenes/armonicos1a4}\includegraphics[scale=0.24]{Imagenes/armonicos4a8}
 \par\end{centering}
 \begin{centering}
-\includegraphics[scale=0.25]{Imagenes/20armonicos}\includegraphics[scale=0.25]{Imagenes/100armonicos}\caption{Forma de una función con distinto número de armónicos.\label{fig:Forma-de-una}}
+\includegraphics[scale=0.24]{Imagenes/20armonicos}\includegraphics[scale=0.24]{Imagenes/100armonicos}\caption{Forma de una función con distinto número de armónicos.\label{fig:Forma-de-una}}
 \par\end{centering}
 \end{figure}
 
@@ -237,7 +240,7 @@ Etapas & Frecuencia de corte del filtro {[}Hz{]} & Q\\
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[scale=0.6]{Imagenes/etapas_superpuestas.PNG}\includegraphics[scale=0.7]{Imagenes/poles_constelation.PNG}\caption{Etapas superpuestas.}
+\includegraphics[scale=0.6]{Imagenes/etapas_superpuestas.PNG}\includegraphics[scale=0.71]{Imagenes/poles_constelation.PNG}\caption{Etapas superpuestas.}
 \par\end{centering}
 \end{figure}
 
@@ -258,7 +261,7 @@ Para implementar la topología Rauch de tipo pasabajos, se implementó
 la siguiente planilla:
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[scale=0.7]{Imagenes/rauch.PNG}\caption{Plantilla de la celda pasabajos Rauch.}
+\includegraphics[scale=0.6]{Imagenes/rauch.PNG}\caption{Plantilla de la celda pasabajos Rauch.}
 \par\end{centering}
 \end{figure}
 
@@ -278,7 +281,10 @@ Para implementar la topología Sallen-Key de tipo pasabajos, se implementó
 la siguiente planilla:
 
 \begin{figure}[H]
-\centering{}\includegraphics{Imagenes/260px-Sallen-Key_Lowpass_General\lyxdot svg}\caption{Plantilla de la celda pasabajos Sallen-Key.}
+\begin{center}
+\includegraphics{Imagenes/sallen-key.png}
+\end{center}
+\caption{Plantilla de la celda pasabajos Sallen-Key.}
 \end{figure}
 
 Las ecuaciones del filtro pertinente a la misma son:
@@ -294,7 +300,9 @@ donde es posible para simplificar el diseño y armado. La simulación
 del filtro final, quedó conformada de la siguiente manera:
 
 \begin{figure}[H]
-
+\begin{center}
+\includegraphics[scale=0.55]{Imagenes/filtroLTSpice.PNG}
+\end{center}
 \caption{Simulación del filtro con LTSpice.}
 
 \end{figure}
@@ -308,20 +316,30 @@ por separado tanto al 10\% como al 5\% y al 1\%. Podemos observar
 los resultados en los siguientes gráficos:
 
 \begin{figure}[H]
-\includegraphics[scale=0.28]{Imagenes/CyR_al_5%.PNG}\includegraphics[scale=0.28]{Imagenes/C_al_1&_yR_al_5%.PNG}
-\begin{centering}
-\includegraphics[scale=0.3]{Imagenes/CyR_al_1%.PNG}\caption{De izq a der: C y R al 10\%, C al 1\% y R al 10\%, C al 10\% y R al
-1\%, C y R al 1\%.}
-\par\end{centering}
+\begin{center}
+
+\includegraphics[scale=0.27]{Imagenes/CyR_al_5.PNG}\includegraphics[scale=0.27]{Imagenes/C_al_1_yR_al_5.PNG}
+
+\includegraphics[scale=0.27]{Imagenes/CyR_al_1.PNG}
+
+\par\end{center}
+\caption{De izq a der: C y R al 10\%, C al 1\% y R al 10\%, C al 10\% y R al 1\%, C y R al 1\%}
 \end{figure}
+
 
 
 Gracias a este análisis, pudimos concluir que si bien los componentes
 al 10\% nos arrojan una excesiva dispersión, los componentes que más
 influyen en este aspecto son las resistencias, por lo que al utilizar
-tecnología SMD con una tolerancia dle 1\% nos aseguramos que el filtro
+tecnología SMD con una tolerancia de 1\% nos aseguramos que el filtro
 va a estar dentro de nuestra banda de tolerancia.
 
 \subsection{Mediciones}
+Una vez realizada la placa final, se procedió a realizar las mediciones pertinentes sobre el filtro en condiciones aisladas (es decir sin que otras etapas de la placa lo carguen). Se obtuvieron los siguientes resultados:
+
+\begin{figure}
+
+\end{figure}
+
 
 \end{document}
