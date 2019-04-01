@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Sat Mar 30 17:29:20 2019
+# Generated: Mon Apr  1 15:48:07 2019
 ##################################################
 
 if __name__ == '__main__':
@@ -166,13 +166,24 @@ class top_block(gr.top_block, Qt.QWidget):
             self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
         for c in range(0, 1):
             self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
-        self._fs_range = Range(2000, 130000, 100, fs0, 200)
+        self._fs_range = Range(400, 130000, 100, fs0, 200)
         self._fs_win = RangeWidget(self._fs_range, self.set_fs, 'Frecuencia de muestreo ', "counter_slider", float)
         self.gui_tab_configuracion_grid_layout_1.addWidget(self._fs_win, 1, 2, 1, 1)
         for r in range(1, 2):
             self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
         for c in range(2, 3):
             self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
+        _filtro_recuperador_on_check_box = Qt.QCheckBox("Filtro recuperador on")
+        self._filtro_recuperador_on_choices = {True: 1, False: 0}
+        self._filtro_recuperador_on_choices_inv = dict((v,k) for k,v in self._filtro_recuperador_on_choices.iteritems())
+        self._filtro_recuperador_on_callback = lambda i: Qt.QMetaObject.invokeMethod(_filtro_recuperador_on_check_box, "setChecked", Qt.Q_ARG("bool", self._filtro_recuperador_on_choices_inv[i]))
+        self._filtro_recuperador_on_callback(self.filtro_recuperador_on)
+        _filtro_recuperador_on_check_box.stateChanged.connect(lambda i: self.set_filtro_recuperador_on(self._filtro_recuperador_on_choices[bool(i)]))
+        self.gui_tab_configuracion_grid_layout_0.addWidget(_filtro_recuperador_on_check_box, 0, 2, 1, 1)
+        for r in range(0, 1):
+            self.gui_tab_configuracion_grid_layout_0.setRowStretch(r, 1)
+        for c in range(2, 3):
+            self.gui_tab_configuracion_grid_layout_0.setColumnStretch(c, 1)
         _filtro_antialiasing_on_check_box = Qt.QCheckBox("Filtro antialiasing on")
         self._filtro_antialiasing_on_choices = {True: 1, False: 0}
         self._filtro_antialiasing_on_choices_inv = dict((v,k) for k,v in self._filtro_antialiasing_on_choices.iteritems())
@@ -184,11 +195,18 @@ class top_block(gr.top_block, Qt.QWidget):
             self.gui_tab_configuracion_grid_layout_0.setRowStretch(r, 1)
         for c in range(3, 4):
             self.gui_tab_configuracion_grid_layout_0.setColumnStretch(c, 1)
+        self._dutycycle_range = Range(0.05, 0.95, 0.05, dutycycle0, 200)
+        self._dutycycle_win = RangeWidget(self._dutycycle_range, self.set_dutycycle, 'Duty cycle', "counter_slider", float)
+        self.gui_tab_configuracion_grid_layout_1.addWidget(self._dutycycle_win, 1, 1, 1, 1)
+        for r in range(1, 2):
+            self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
+        for c in range(1, 2):
+            self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
         	1024, #size
         	samp_rate, #samp_rate
         	"Output", #name
-        	5 #number of inputs
+        	6 #number of inputs
         )
         self.qtgui_time_sink_x_0.set_update_time(0.10)
         self.qtgui_time_sink_x_0.set_y_axis(-1, 1)
@@ -207,7 +225,7 @@ class top_block(gr.top_block, Qt.QWidget):
           self.qtgui_time_sink_x_0.disable_legend()
 
         labels = ['Salida filtro antialias', 'Salida sample and hold', 'Salida llave analogica', 'Salida filtro recuperador', 'Entrada',
-                  '', '', '', '', '']
+                  'Output', '', '', '', '']
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
         colors = ["blue", "red", "green", "magenta", "cyan",
@@ -219,7 +237,7 @@ class top_block(gr.top_block, Qt.QWidget):
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
 
-        for i in xrange(5):
+        for i in xrange(6):
             if len(labels[i]) == 0:
                 self.qtgui_time_sink_x_0.set_line_label(i, "Data {0}".format(i))
             else:
@@ -242,7 +260,7 @@ class top_block(gr.top_block, Qt.QWidget):
         	0, #fc
         	samp_rate, #bw
         	"", #name
-        	5 #number of inputs
+        	6 #number of inputs
         )
         self.qtgui_freq_sink_x_0.set_update_time(0.10)
         self.qtgui_freq_sink_x_0.set_y_axis(-140, 10)
@@ -261,14 +279,14 @@ class top_block(gr.top_block, Qt.QWidget):
           self.qtgui_freq_sink_x_0.set_plot_pos_half(not False)
 
         labels = ['Salida filtro antialias', 'Salida sample and hold', 'Salida llave analogica', 'Salida filtro recuperador', 'Entrada',
-                  '', '', '', '', '']
+                  'Output', '', '', '', '']
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
         colors = ["blue", "red", "green", "magenta", "cyan",
                   "magenta", "yellow", "dark red", "dark green", "dark blue"]
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
-        for i in xrange(5):
+        for i in xrange(6):
             if len(labels[i]) == 0:
                 self.qtgui_freq_sink_x_0.set_line_label(i, "Data {0}".format(i))
             else:
@@ -283,30 +301,13 @@ class top_block(gr.top_block, Qt.QWidget):
             self.main_tab_grid_layout_0.setRowStretch(r, 1)
         for c in range(0, 1):
             self.main_tab_grid_layout_0.setColumnStretch(c, 1)
-        _filtro_recuperador_on_check_box = Qt.QCheckBox("Filtro recuperador on")
-        self._filtro_recuperador_on_choices = {True: 1, False: 0}
-        self._filtro_recuperador_on_choices_inv = dict((v,k) for k,v in self._filtro_recuperador_on_choices.iteritems())
-        self._filtro_recuperador_on_callback = lambda i: Qt.QMetaObject.invokeMethod(_filtro_recuperador_on_check_box, "setChecked", Qt.Q_ARG("bool", self._filtro_recuperador_on_choices_inv[i]))
-        self._filtro_recuperador_on_callback(self.filtro_recuperador_on)
-        _filtro_recuperador_on_check_box.stateChanged.connect(lambda i: self.set_filtro_recuperador_on(self._filtro_recuperador_on_choices[bool(i)]))
-        self.gui_tab_configuracion_grid_layout_0.addWidget(_filtro_recuperador_on_check_box, 0, 2, 1, 1)
-        for r in range(0, 1):
-            self.gui_tab_configuracion_grid_layout_0.setRowStretch(r, 1)
-        for c in range(2, 3):
-            self.gui_tab_configuracion_grid_layout_0.setColumnStretch(c, 1)
         self.filtro_recuperador = filter.fir_filter_fff(1, firdes.low_pass(
         	1, samp_rate, freq0*18, freq0*18*0.5, firdes.WIN_HAMMING, 6.76))
         self.filtro_antialiasing = filter.fir_filter_fff(1, firdes.low_pass(
         	1, samp_rate, freq0*18, freq0*18*0.5, firdes.WIN_HAMMING, 6.76))
-        self._dutycycle_range = Range(0.05, 0.95, 0.05, dutycycle0, 200)
-        self._dutycycle_win = RangeWidget(self._dutycycle_range, self.set_dutycycle, 'Duty cycle', "counter_slider", float)
-        self.gui_tab_configuracion_grid_layout_1.addWidget(self._dutycycle_win, 1, 1, 1, 1)
-        for r in range(1, 2):
-            self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
-        for c in range(1, 2):
-            self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
         self.blocks_wavfile_source_0 = blocks.wavfile_source('sen32.wav', True)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
+        self.blocks_threshold_ff_0 = blocks.threshold_ff(dutycycle, dutycycle, 0)
         self.blocks_sample_and_hold_xx_0 = blocks.sample_and_hold_ff()
         self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((seniales_control_iguales, ))
@@ -333,6 +334,13 @@ class top_block(gr.top_block, Qt.QWidget):
         	input_index=filtro_antialiasing_on,
         	output_index=0,
         )
+        self.blks2_selector_0_0_0 = grc_blks2.selector(
+        	item_size=gr.sizeof_float*1,
+        	num_inputs=2,
+        	num_outputs=1,
+        	input_index=filtro_recuperador_on,
+        	output_index=0,
+        )
         self.blks2_selector_0_0 = grc_blks2.selector(
         	item_size=gr.sizeof_float*1,
         	num_inputs=2,
@@ -349,21 +357,22 @@ class top_block(gr.top_block, Qt.QWidget):
         )
         self.analog_sig_source_x_0_1_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, input_freq, 1, 0)
         self.analog_sig_source_x_0_1 = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, input_freq, 1, 0)
-        self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_SQR_WAVE, fs, 1, 0)
+        self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, fs, 1, 0)
 
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_sig_source_x_0_0, 0), (self.blks2_selector_1, 0))
-        self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_add_const_vxx_0, 0))
-        self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_multiply_xx_0, 1))
+        self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_threshold_ff_0, 0))
         self.connect((self.analog_sig_source_x_0_1, 0), (self.blks2_selector_0_1, 1))
         self.connect((self.analog_sig_source_x_0_1_0, 0), (self.blks2_selector_0_1, 0))
         self.connect((self.blks2_selector_0, 0), (self.blks2_selector_0_0, 0))
         self.connect((self.blks2_selector_0, 0), (self.blocks_multiply_xx_0, 0))
+        self.connect((self.blks2_selector_0_0, 0), (self.blks2_selector_0_0_0, 0))
         self.connect((self.blks2_selector_0_0, 0), (self.filtro_recuperador, 0))
+        self.connect((self.blks2_selector_0_0_0, 0), (self.qtgui_freq_sink_x_0, 5))
+        self.connect((self.blks2_selector_0_0_0, 0), (self.qtgui_time_sink_x_0, 5))
         self.connect((self.blks2_selector_0_0_0_0, 0), (self.blks2_selector_0, 0))
         self.connect((self.blks2_selector_0_0_0_0, 0), (self.blocks_sample_and_hold_xx_0, 0))
         self.connect((self.blks2_selector_0_1, 0), (self.blocks_throttle_0, 0))
@@ -377,6 +386,9 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.blks2_selector_0, 1))
         self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.qtgui_freq_sink_x_0, 1))
         self.connect((self.blocks_sample_and_hold_xx_0, 0), (self.qtgui_time_sink_x_0, 1))
+        self.connect((self.blocks_threshold_ff_0, 0), (self.blks2_selector_1, 0))
+        self.connect((self.blocks_threshold_ff_0, 0), (self.blocks_add_const_vxx_0, 0))
+        self.connect((self.blocks_threshold_ff_0, 0), (self.blocks_multiply_xx_0, 1))
         self.connect((self.blocks_throttle_0, 0), (self.blks2_selector_0_0_0_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.filtro_antialiasing, 0))
         self.connect((self.blocks_throttle_0, 0), (self.qtgui_freq_sink_x_0, 4))
@@ -385,6 +397,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.filtro_antialiasing, 0), (self.blks2_selector_0_0_0_0, 1))
         self.connect((self.filtro_antialiasing, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.filtro_antialiasing, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.filtro_recuperador, 0), (self.blks2_selector_0_0_0, 1))
         self.connect((self.filtro_recuperador, 0), (self.qtgui_freq_sink_x_0, 3))
         self.connect((self.filtro_recuperador, 0), (self.qtgui_time_sink_x_0, 3))
 
@@ -484,6 +497,7 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_filtro_recuperador_on(self, filtro_recuperador_on):
         self.filtro_recuperador_on = filtro_recuperador_on
         self._filtro_recuperador_on_callback(self.filtro_recuperador_on)
+        self.blks2_selector_0_0_0.set_input_index(int(self.filtro_recuperador_on))
 
     def get_filtro_antialiasing_on(self):
         return self.filtro_antialiasing_on
@@ -498,6 +512,8 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_dutycycle(self, dutycycle):
         self.dutycycle = dutycycle
+        self.blocks_threshold_ff_0.set_hi(self.dutycycle)
+        self.blocks_threshold_ff_0.set_lo(self.dutycycle)
 
 
 def main(top_block_cls=top_block, options=None):
