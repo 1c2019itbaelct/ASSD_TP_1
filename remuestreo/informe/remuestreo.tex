@@ -1,6 +1,22 @@
 \documentclass[../../ASSD_TP1_G7.tex]{subfiles}
 \begin{document}
 \chapter*{Remuestreo}
+Para realizar la medición se utiliza el sample and hold y la llave analógica en contra fase, es decir la se\~nal de control de la llave y el sample and hold son inversas. Permitiendo lograr un muestreo similar al instantáneo, ya que la se\~nal es constante en el momento que la llave analógica se acciona.
+
+La se\~nal se puede describir matemáticamente de la siguiente manera:
+
+\begin{equation}
+x_{s}(t)=\left[ x(t)\left( \sum_{i=-\infty}^{\infty} \delta(t - i T_s) \right) \right]* \pi(\frac{t}{\tau})
+\end{equation}
+
+\par Donde $x(t)$ se\~nal antes y $x_{s}(t)$ es la se\~nal después de la llave analógica y el sample and hold.$T_s$ es el periodo de sampleo y $\tau$ es el ancho de la ventana del sample and hold.
+\par Aplicando la transformada de Fourier a la esxpresion de $x_{s}$ se obtiene su espectro.
+
+\begin{equation}
+X_{s}(f)=\left( \sum_{k=-\infty}^{\infty} X(f - k f _s) \right) f _s \tau sinc(f \tau) \label{eq:espectroRemuestreo}
+\end{equation}
+
+Tal como se observa en la ecuación \ref{eq:espectroRemuestreo}, el espectro de la se\~nal esta deformado por un sinc. Par solucionar este problema, una opción seria agrandar el $\tau$, el sinc tendería a la delta, pero se produce una perdida de potencia. Otra opción es achicar el $\tau$ , el ancho del sinc aumenta, el problema es comienzan aparecer repeticiones del espectro que antes se encontraban atenuadas por el sinc, produciendo aliasing.
 
 
 
