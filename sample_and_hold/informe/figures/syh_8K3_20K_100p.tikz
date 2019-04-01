@@ -5,10 +5,11 @@
 	width = \textwidth, 
 	cycle list name = color list,
 	ytick = {-4,...,5}]
-\addplot table [x=x-axis, y=1, col sep=comma] {\pgfpath../simulacion/scope_24.csv};
-\addplot table [x=x-axis, y=2, col sep=comma] {\pgfpath../simulacion/scope_24.csv};
-\addplot table [x=x-axis, y=3, col sep=comma] {\pgfpath../simulacion/scope_24.csv};
+\addplot table [x=x-axis, y=1, col sep=comma] {\pgfpath../mediciones/sh_8k3_20k_p.csv};
+\addplot table [x=x-axis, y=2, col sep=comma] {\pgfpath../mediciones/sh_8k3_20k_p.csv};
+\addplot table [x=x-axis, y=3, col sep=comma] {\pgfpath../mediciones/sh_8k3_20k_p.csv};
+\addplot table [x=x-axis, y=4, col sep=comma] {\pgfpath../mediciones/sh_8k3_20k_p.csv};
 
-\legend{SCSH, Input, Output}
+\legend{Input, Output, Tensi\'on $C_H$, SCSH}
 \end{axis}
 \end{tikzpicture}

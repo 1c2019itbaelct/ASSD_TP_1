@@ -1,5 +1,12 @@
 \documentclass[../../ASSD_TP1_G7.tex]{subfiles}
 \begin{document}
+
+	\input{figures/syh_8k3_20k_100p_sim.tikz}
+	\input{figures/syh_8k3_20k_100n_sim.tikz}
+	\input{figures/syh_1m2_2m4_100p_sim.tikz}
+	\input{figures/syh_1m2_2m4_100n_sim.tikz}
+
+
 \chapter*{Sample and hold}
 El amplificador \textit{sample-and-hold}, o SHA, mantiene el valor de una se\~nal anal\'ogica por un determinado tiempo. Es frecuentemente utilizado para conversiones anal\'ogico-digital. Se utiliza el circuito integrado $LF398$. Por consigna, $FS = 2\cdot 5V = 10V$.
 \[\frac{1}{2}\text{LSB} = 0.5\cdot \frac{FS}{2^8} = \frac{10V}{2^9} \approx 20mV\]
@@ -105,44 +112,60 @@ Se elige un duty cycle de 50\%, lo cual deja $5 \mu s$ para el modo \textit{samp
 			\label{fig:syh_offset_correction_datasheet}
 		\end{figure}	
 		
+		En la figura \ref{fig:syh_offset_correction_datasheet} se observan dos circuitos de correcci\'on. El superior es para correcci\'on de $V_{OS}$
 
 \section{Mediciones}
 
 \begin{figure}[H]
 	\centering
-	\input{figures/syh_1M2_2M4_100n.tikz}
-	\caption{Medici\'on \textit{sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100nF$.}
+	\begin{subfigure}[t]{0.45\linewidth}
+		\input{figures/syh_1M2_2M4_100n.tikz}
+		\subcaption{Medici\'on.}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\linewidth}
+		\input{figures/syh_1M2_2M4_100n_sim.tikz}
+		\subcaption{Simulaci\'on ltSpice.}
+	\end{subfigure}
+	\caption{\textit{Sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100nF$.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\input{figures/syh_8k3_20k_100n.tikz}
-	\caption{Medici\'on \textit{sample and hold}. $f_{entrada} = 8K3$, $f_{SCSH}=20K$, $C_H = 100nF$.}
+	\begin{subfigure}[t]{0.45\linewidth}
+		\input{figures/syh_1M2_2M4_100p.tikz}
+		\subcaption{Medici\'on.}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\linewidth}
+		\input{figures/syh_1M2_2M4_100p_sim.tikz}
+		\subcaption{Simulaci\'on ltSpice.}
+	\end{subfigure}
+	\caption{\textit{Sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100pF$.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\input{figures/syh_8k3_20k_100n_sim.tikz}
-	\caption{Simulaci\'on \textit{sample and hold}. $f_{entrada} = 8K3$, $f_{SCSH}=20K$, $C_H = 100nF$.}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\input{figures/syh_1M2_2M4_100p.tikz}
-	\caption{Medici\'on \textit{sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100pF$.}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\input{figures/syh_8k3_20k_100p.tikz}
-	\caption{Medici\'on \textit{sample and hold}. $f_{entrada} = 8K3$, $f_{SCSH}=20K$, $C_H = 100pF$.}
+	\begin{subfigure}[t]{0.45\linewidth}
+		\input{figures/syh_8k3_20k_100n.tikz}
+		\subcaption{Medici\'on.}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\linewidth}
+		\input{figures/syh_8k3_20k_100n_sim.tikz}
+		\subcaption{Simulaci\'on ltSpice.}
+	\end{subfigure}
+	\caption{\textit{Sample and hold}. $f_{entrada} = 8.3KHz$, $f_{SCSH}=20KHz$, $C_H = 100nF$.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\input{figures/syh_8k3_20k_100p_zoom.tikz}
-	\caption{Detalle de la medici\'on \textit{sample and hold}. $f_{entrada} = 8K3$, $f_{SCSH}=20K$, $C_H = 100pF$.}
+	\begin{subfigure}[t]{0.45\linewidth}
+		\input{figures/syh_8k3_20k_100p.tikz}
+		\subcaption{Medici\'on.}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\linewidth}
+		\input{figures/syh_8k3_20k_100p_sim.tikz}
+		\subcaption{Simulaci\'on ltSpice.}
+	\end{subfigure}
+	\caption{\textit{Sample and hold}. $f_{entrada} = 8.3KHz$, $f_{SCSH}=20KHz$, $C_H = 100pF$.}
 \end{figure}
 
 \end{document}
