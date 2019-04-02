@@ -1,6 +1,7 @@
 \documentclass[../../ASSD_TP1_G7.tex]{subfiles}
 \begin{document}
 \chapter*{Mediciones b\'asicas}
+
 Para esta sección del informe, vamos a proceder a tomar las mediciones
 pertinentes al punto 6 del trabajo práctico, las cuales constan de
 varias mediciones progresivas sobre la placa total ya ensamblada.
@@ -48,7 +49,28 @@ Para la señal $X_{b}$, los valores óptimos obtenidos fueron: $f_{s}:[91;313](k
 en el máximo de ese intervalo, $DC=48.8\%,$$A:(0;2]$(Vpp) midiendo
 para $A=1V_{pp}$.
 
-FALTA POTENCIA Y DESARROLLO MATEMATICO???
+Para realizar un análisis más completo, hemos realizado una simulación
+con igualdad de parámetros para poder contrastar las diferencias entre
+los planos teóricos y prácticos. Podemos ver los resultados de dichas
+simulaciones en la siguiente imagen:
+
+\begin{figure}[H]
+
+\begin{centering}
+\includegraphics[scale=0.50]{Imagenes/simulacion_llave_seno_a}
+\par\end{centering}
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_llave_diente_a}\caption{Simulaciones de las respuestas a las señales $X_{a}$ y $X_{b}$ }
+\par\end{centering}
+\end{figure}
+
+A primera vista, podemos ver como se aprecian ciertas diferencias
+entre el modelo teórico y el resultante en la práctica. Primero, observamos
+como en el modelo teórico, la señal parece tener un ripple que el
+osciloscopio no muestra, esto se debe a que en efecto en el modelo
+teórico la recuperación de la señal está dada por funciones $\delta$,
+mientras que en la placa se obtienen funciones sincs lo que hace que
+aparezcan más valores.
 
 \subsection{Cambios en la $f_{in}$ y en la $f_{s}$}
 
@@ -71,6 +93,21 @@ Los resultados se ven plasmados en la siguiente image:
 \centering{}\includegraphics[scale=0.25]{Imagenes/llave_senooo_pto_b2}\includegraphics[scale=0.25]{Imagenes/llave_diente_pto_b}\caption{De izquierda a derecha: señal $X_{a}$y señal $X_{b}$.}
 \end{figure}
 
+Si contrastamos con las simulaciones pertinentes, las cuales se muestran
+a continuación, no se observan diferencias significativas, más alla
+de la intensificación del ripple en la salida, y de la atenuación
+pertinente que sufre cada señal.
+
+\begin{figure}[H]
+
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_llave_seno_b1}
+\par\end{centering}
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_llave_diente_b1}\caption{Simulaciones de la señal $X_{a}$y señal $X_{b}$ }
+\par\end{centering}
+\end{figure}
+
 
 \subsubsection{$f_{in}=f_{a}$}
 
@@ -87,6 +124,23 @@ pueden ser apreciados en la siguiente imagen:
 \par\end{centering}
 \end{figure}
 
+Resultados similares nos arroja la simulación realizada, en la cual
+si bien las gráficas de la simulación se ven ``estéticamente'' afectadas
+por el hecho de la cantidad de puntos que se incorporaron en la imagen,
+lo cierto es que en ambos casos la señal saliente resulta nula para
+el caso de la senoidal, e igualmente para el caso de la función rampa
+con la salvedad de que en vista de que el contenido armónico es mayor,
+no es exactamente cero lo que se aprecia, sino que se tiene algo de
+ruido a la salida.
+
+\begin{figure}[H]
+
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_llave_seno_b2}
+\par\end{centering}
+\centering{}\includegraphics[scale=0.5]{Imagenes/simulacion_llave_diente_b2}\caption{Simulaciones de la señal $X_{a}$y señal $X_{b}$ en iguales condiciones.}
+\end{figure}
+
 
 \subsection{$f_{in}=f_{s}\protect\leq f_{p}$}
 
@@ -97,10 +151,22 @@ y un DC de 47.3\%. La salida resultante se aprecia a continuación:
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[scale=0.3]{Imagenes/llave_senooo_pto_c}\caption{Señal $X_{b}$ con frecuencia de muestreo igual a la de la señal.}
+\includegraphics[scale=0.5]{Imagenes/llave_senooo_pto_c}\caption{Señal $X_{b}$ con frecuencia de muestreo igual a la de la señal.}
 \par\end{centering}
 \end{figure}
 
+\begin{figure}[H]
+
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_llave_seno_c}\caption{Simulación de la señal $X_{b}$.}
+\par\end{centering}
+\end{figure}
+
+A la hora de contrastar con la simulación, notamos que se obtiene
+la misma forma de la señal en ambos casos, solo que en la simulación
+la señal queda definida positivamente, a diferencia de lo que ocurre
+en el osciloscopio. Esto se debe a que la simulación no contempla
+el desfasaje que el filtro le inyecta a las distintas frecuencias.
 
 \subsection{Aliasing}
 
@@ -113,12 +179,26 @@ Podemos ver los efectos en la siguiente imagen:
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[scale=0.3]{Imagenes/yh_pt6d_cuad2}
+\includegraphics[scale=0.5]{Imagenes/yh_pt6d_cuad2}
 \par\end{centering}
 \caption{Señal muestreada con una señal de 20kHz.}
 \end{figure}
 
-\newpage
+Si ahora simulamos la señal en nuestra GUI, obtenemos lo siguiente:
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_llave_diente_d}\caption{Simulación de la señal anterior.}
+\par\end{centering}
+\end{figure}
+
+Vemos como en la simulación, el efecto de aliasing no aparece en el
+rango de frecuencias que se especificaron anteriormente, puesto que
+vemos que la salida posee la forma de la señal de entrada. Esto es
+el producto de que en la teoría, el muestreo se produce con funciones
+$\delta$ , por lo que el espectro de la señal digital queda más disperso
+que el que se obtiene en el laboratorio, por lo que a la hora de recuperarlo,
+el aliasing se produce a una menor frecuencia $f_{s}$.
 
 \section{Sample and Hold}
 
@@ -143,7 +223,24 @@ Para la señal $X_{b}$, los valores óptimos obtenidos fueron: $f_{s}:[91;307](k
 midiendo en la frecuencia de 290kHz (pertenceciente a ese intervalo),
 $DC=[30;47.5](\%)$, $A:(0;2]$(Vpp) midiendo para $A=1V_{pp}$.
 
-FALTA POTENCIA Y DESARROLLO MATEMATICO???
+Utilizando el entorno de simulación realizado, obtuvimos las siguientes
+imagenes:
+
+\begin{figure}[H]
+
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_syh_seno_a}
+\par\end{centering}
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_syh_diente_a}\caption{Simulaciones realizadas en el GUI.}
+\par\end{centering}
+\end{figure}
+
+Podemos ver como lo obtenido en las mediciones no discrepan con las
+simulaciones. Si acaso podemos destacar que para la función rampa
+simulada no se aprecia un ripple montado sobre sí, lo cual puede ser
+explicado desde las falencias de nuestro filtro mencionadas previamente
+en este trabajo práctico.
 
 \subsection{Cambios en la $f_{in}$ y en la $f_{s}$}
 
@@ -168,6 +265,23 @@ Los resultados se ven plasmados en la siguiente image:
 \par\end{centering}
 \end{figure}
 
+Ahora, simulando lo previamente relatado, podemos ver una diferencia
+entre la función rampa obtenida en el osciloscopio y la simulada:
+vemos que en osciloscopio podemos recuperar la señal de manera cuasi
+perfecta a exepción del ripple que nos aparece al principio; pero
+si observamos la simulación vemos que la señal de salida presenta
+un menor contenido armónico.
+
+\begin{figure}[H]
+
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_syh_seno_b1}
+\par\end{centering}
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_syh_diente_b1}\caption{De izquierda a derecha: señal $X_{a}$y señal $X_{b}$simuladas.}
+\par\end{centering}
+\end{figure}
+
 
 \subsubsection{$f_{in}=f_{a}$}
 
@@ -184,6 +298,20 @@ pueden ser apreciados en la siguiente imagen:
 \par\end{centering}
 \end{figure}
 
+Ahora, simulando, obtenemos lo siguiente:
+
+\begin{figure}[H]
+
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_syh_seno_b2}
+\par\end{centering}
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_syh_diente_b2}\caption{De izquierda a derecha: señal $X_{a}$y señal $X_{b}$ simuladas.}
+\par\end{centering}
+\end{figure}
+
+Vemos como efectivamente la señal es nula y totalmente deformada en
+ambos casos.
 
 \subsection{$f_{in}=f_{s}\protect\leq f_{p}$}
 
@@ -196,10 +324,21 @@ La salida resultante se aprecia a continuación:
 \begin{figure}[H]
 
 \begin{centering}
-\includegraphics[scale=0.3]{Imagenes/yh_pt6c_sin2}\caption{Señal $X_{b}$ con frecuencia de muestreo igual a la de la señal.}
+\includegraphics[scale=0.5]{Imagenes/yh_pt6c_sin2}\caption{Señal $X_{b}$ con frecuencia de muestreo igual a la de la señal.}
 \par\end{centering}
 \end{figure}
 
+Ahora simulando el caso en la GUI, obtenemos:
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_syh_seno_c}\caption{Simulación de la señal $X_{a}$.}
+\par\end{centering}
+\end{figure}
+
+Nuevamente, al igual que en el insciso en el cual usamos la llave
+analógica, la forma de la función resultante es la misma con la salvedad
+que posee otro desfasaje.
 
 \subsection{Aliasing}
 
@@ -212,8 +351,22 @@ ver los efectos en la siguiente imagen:
 
 \begin{figure}[H]
 \begin{centering}
-\includegraphics[scale=0.3]{Imagenes/yh_pt6d_cuad2}
+\includegraphics[scale=0.5]{Imagenes/yh_pt6d_cuad2}
 \par\end{centering}
-\caption{Señal muestreada con una señal de 20kHz.}
+\caption{Señal muestreada con una señal de 6kHz.}
 \end{figure}
+
+Ahora, la simulación nos entrega la siguiente gráfica:
+
+\begin{figure}[H]
+
+\begin{centering}
+\includegraphics[scale=0.5]{Imagenes/simulacion_syh_diente_d}\caption{Señal simulada a iguales condiciones.}
+\par\end{centering}
+\end{figure}
+
+A diferencia de lo que pasaba con la llave analógica, vemos que aquí
+también la simulación posee aliasing, por lo que la figura de la señal
+se ve alterada y deformada. La forma propiamente obtenida en la simulación
+es similar a la obtenida en el osciloscopio.
 \end{document}
