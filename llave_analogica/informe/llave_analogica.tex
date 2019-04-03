@@ -1,4 +1,20 @@
 \documentclass[../../ASSD_TP1_G7.tex]{subfiles}
 \begin{document}
 \chapter*{Llave anal\'ogica}
+La llave anal\'ogica que de utilizo es la 4066 por los siguientes motivos:
+\begin{itemize}
+\item Resistencia de ON de 125 \Omega
+\end{itemize}
+
+\subsection*{Resistencia de pulldown}
+Cuando la llave analógica se abre, la salida de esta queda flotante, por lo tanto, hay que colocar una resistencia de pulldown que sea mucho mayor a la resistencia de ON de la a llave.
+
+Otro problema en la elección de la resistencia, es que las llaves anal\'ogicas, presentan a la salida una capacidad la cual, junto con la resistencia de pulldown forman un RC, haciendo que cuando se abre la llave, la se\~nal de salida tenga un retraso respecto de la de entrada y parte de esta se pierde.
+
+Para minimizar esto, hay que tener un tiempo de estalecimiento bajo, para esto la resistencia debe ser baja, pero no tan baja como para que sea comparable con Ron
+
+Por lo tanto, la resistencia de pulldown que se eligira no debera ser tan grande como para que el tiempo de establecimiento sea alto, ni tan chica como para que se pierda gran parte de la señal.
+
+Teniendo todo esto en cuenta lo mencionado ateriormente, se eligió una resistencia de pulldown de 5 k\Omega.
+
 \end{document}
