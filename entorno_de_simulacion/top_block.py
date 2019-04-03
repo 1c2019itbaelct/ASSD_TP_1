@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Apr  2 19:39:42 2019
+# Generated: Tue Apr  2 21:45:20 2019
 ##################################################
 
 if __name__ == '__main__':
@@ -65,15 +65,18 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
+        self.mod_index0 = mod_index0 = 0.5
         self.fs0 = fs0 = 100000
         self.freq0 = freq0 = 2500
         self.fpor0 = fpor0 = 30000
         self.fmod0 = fmod0 = 2000
         self.dutycycle0 = dutycycle0 = 0.5
+        self.amplitud0 = amplitud0 = 1
         self.syh_on = syh_on = True
         self.switch_on = switch_on = True
         self.seniales_control_iguales = seniales_control_iguales = 0
         self.samp_rate = samp_rate = 300000
+        self.mod_index = mod_index = mod_index0
         self.input_signal = input_signal = 0
         self.input_freq = input_freq = freq0
         self.fs = fs = fs0
@@ -82,6 +85,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.filtro_recuperador_on = filtro_recuperador_on = True
         self.filtro_antialiasing_on = filtro_antialiasing_on = True
         self.dutycycle = dutycycle = dutycycle0
+        self.amplitud = amplitud = amplitud0
 
         ##################################################
         # Blocks
@@ -147,6 +151,13 @@ class top_block(gr.top_block, Qt.QWidget):
             self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
         for c in range(1, 2):
             self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
+        self._mod_index_range = Range(0, 1, 0.05, mod_index0, 200)
+        self._mod_index_win = RangeWidget(self._mod_index_range, self.set_mod_index, 'Indice de modulacion (solo AM)', "counter_slider", float)
+        self.gui_tab_configuracion_grid_layout_1.addWidget(self._mod_index_win, 3, 1, 1, 1)
+        for r in range(3, 4):
+            self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
+        for c in range(1, 2):
+            self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
         self._input_signal_options = (0, 1, 2, 3, )
         self._input_signal_labels = ('Seno', 'Diente de sierra', 'Seno 3/2', 'Senial AM', )
         self._input_signal_tool_bar = Qt.QToolBar(self)
@@ -164,7 +175,7 @@ class top_block(gr.top_block, Qt.QWidget):
         for c in range(0, 1):
             self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
         self._input_freq_range = Range(freq0/10, freq0*10, freq0/100, freq0, 200)
-        self._input_freq_win = RangeWidget(self._input_freq_range, self.set_input_freq, 'Frecuencia senial de entrada', "counter_slider", float)
+        self._input_freq_win = RangeWidget(self._input_freq_range, self.set_input_freq, 'Frecuencia senial de entrada (no AM ni sen32)', "counter_slider", float)
         self.gui_tab_configuracion_grid_layout_1.addWidget(self._input_freq_win, 1, 0, 1, 1)
         for r in range(1, 2):
             self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
@@ -178,14 +189,14 @@ class top_block(gr.top_block, Qt.QWidget):
         for c in range(0, 1):
             self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
         self._fpor_range = Range(100, 130000, 100, fpor0, 200)
-        self._fpor_win = RangeWidget(self._fpor_range, self.set_fpor, 'Frecuencia de la portadora', "counter_slider", float)
+        self._fpor_win = RangeWidget(self._fpor_range, self.set_fpor, 'Frecuencia portadora (solo AM)', "counter_slider", float)
         self.gui_tab_configuracion_grid_layout_1.addWidget(self._fpor_win, 2, 1, 1, 1)
         for r in range(2, 3):
             self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
         for c in range(1, 2):
             self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
         self._fmod_range = Range(100, 130000, 100, fmod0, 200)
-        self._fmod_win = RangeWidget(self._fmod_range, self.set_fmod, 'Frecuencia de la moduladora', "counter_slider", float)
+        self._fmod_win = RangeWidget(self._fmod_range, self.set_fmod, 'Frecuencia moduladora (solo AM)', "counter_slider", float)
         self.gui_tab_configuracion_grid_layout_1.addWidget(self._fmod_win, 1, 1, 1, 1)
         for r in range(1, 2):
             self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
@@ -220,6 +231,15 @@ class top_block(gr.top_block, Qt.QWidget):
             self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
         for c in range(0, 1):
             self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
+        self._amplitud_range = Range(0, 5, 0.2, amplitud0, 200)
+        self._amplitud_win = RangeWidget(self._amplitud_range, self.set_amplitud, 'Amplitud', "counter_slider", float)
+        self.gui_tab_configuracion_grid_layout_1.addWidget(self._amplitud_win, 4, 1, 1, 1)
+        for r in range(4, 5):
+            self.gui_tab_configuracion_grid_layout_1.setRowStretch(r, 1)
+        for c in range(1, 2):
+            self.gui_tab_configuracion_grid_layout_1.setColumnStretch(c, 1)
+        self.senoidal = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, input_freq, 1, 0)
+        self.sen32 = blocks.wavfile_source('sen32.wav', True)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
         	1024, #size
         	samp_rate, #samp_rate
@@ -319,18 +339,23 @@ class top_block(gr.top_block, Qt.QWidget):
             self.main_tab_grid_layout_0.setRowStretch(r, 1)
         for c in range(0, 1):
             self.main_tab_grid_layout_0.setColumnStretch(c, 1)
+        self.portadora = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, fpor, 1, 0)
+        self.moduladora = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, fmod, 1, 0)
         self.filtro_recuperador = filter.fir_filter_fff(1, firdes.low_pass(
         	1, samp_rate, freq0*18, freq0*18*0.5, firdes.WIN_HAMMING, 6.76))
         self.filtro_antialiasing = filter.fir_filter_fff(1, firdes.low_pass(
         	1, samp_rate, freq0*18, freq0*18*0.5, firdes.WIN_HAMMING, 6.76))
-        self.blocks_wavfile_source_0 = blocks.wavfile_source('sen32.wav', True)
+        self.diente_de_sierra = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, input_freq, 1, 0)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
         self.blocks_threshold_ff_0 = blocks.threshold_ff(dutycycle, dutycycle, 0)
         self.blocks_sample_and_hold_xx_0 = blocks.sample_and_hold_ff()
         self.blocks_multiply_xx_1 = blocks.multiply_vff(1)
         self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
+        self.blocks_multiply_const_vxx_0_0_0 = blocks.multiply_const_vff((amplitud, ))
+        self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vff((mod_index, ))
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((seniales_control_iguales, ))
         self.blocks_float_to_char_0 = blocks.float_to_char(1, 1)
+        self.blocks_add_const_vxx_1 = blocks.add_const_vff((1, ))
         self.blocks_add_const_vxx_0 = blocks.add_const_vff((-1, ))
         self.blks2_selector_1 = grc_blks2.selector(
         	item_size=gr.sizeof_float*1,
@@ -374,10 +399,6 @@ class top_block(gr.top_block, Qt.QWidget):
         	input_index=syh_on,
         	output_index=0,
         )
-        self.analog_sig_source_x_0_1_0_0_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, fmod, 1, 0)
-        self.analog_sig_source_x_0_1_0_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, fpor, 1, 0)
-        self.analog_sig_source_x_0_1_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, input_freq, 1, 0)
-        self.analog_sig_source_x_0_1 = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, input_freq, 1, 0)
         self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, fs, 1, 0)
 
 
@@ -386,10 +407,6 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_threshold_ff_0, 0))
-        self.connect((self.analog_sig_source_x_0_1, 0), (self.blks2_selector_0_1, 1))
-        self.connect((self.analog_sig_source_x_0_1_0, 0), (self.blks2_selector_0_1, 0))
-        self.connect((self.analog_sig_source_x_0_1_0_0, 0), (self.blocks_multiply_xx_1, 0))
-        self.connect((self.analog_sig_source_x_0_1_0_0_0, 0), (self.blocks_multiply_xx_1, 1))
         self.connect((self.blks2_selector_0, 0), (self.blks2_selector_0_0, 0))
         self.connect((self.blks2_selector_0, 0), (self.blocks_multiply_xx_0, 0))
         self.connect((self.blks2_selector_0_0, 0), (self.blks2_selector_0_0_0, 0))
@@ -398,11 +415,14 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blks2_selector_0_0_0, 0), (self.qtgui_time_sink_x_0, 5))
         self.connect((self.blks2_selector_0_0_0_0, 0), (self.blks2_selector_0, 0))
         self.connect((self.blks2_selector_0_0_0_0, 0), (self.blocks_sample_and_hold_xx_0, 0))
-        self.connect((self.blks2_selector_0_1, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.blks2_selector_0_1, 0), (self.blocks_multiply_const_vxx_0_0_0, 0))
         self.connect((self.blks2_selector_1, 0), (self.blocks_float_to_char_0, 0))
         self.connect((self.blocks_add_const_vxx_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.blocks_add_const_vxx_1, 0), (self.blocks_multiply_xx_1, 1))
         self.connect((self.blocks_float_to_char_0, 0), (self.blocks_sample_and_hold_xx_0, 1))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blks2_selector_1, 1))
+        self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_add_const_vxx_1, 0))
+        self.connect((self.blocks_multiply_const_vxx_0_0_0, 0), (self.blocks_throttle_0, 0))
         self.connect((self.blocks_multiply_xx_0, 0), (self.blks2_selector_0_0, 1))
         self.connect((self.blocks_multiply_xx_0, 0), (self.qtgui_freq_sink_x_0, 2))
         self.connect((self.blocks_multiply_xx_0, 0), (self.qtgui_time_sink_x_0, 2))
@@ -417,18 +437,29 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_throttle_0, 0), (self.filtro_antialiasing, 0))
         self.connect((self.blocks_throttle_0, 0), (self.qtgui_freq_sink_x_0, 4))
         self.connect((self.blocks_throttle_0, 0), (self.qtgui_time_sink_x_0, 4))
-        self.connect((self.blocks_wavfile_source_0, 0), (self.blks2_selector_0_1, 2))
+        self.connect((self.diente_de_sierra, 0), (self.blks2_selector_0_1, 1))
         self.connect((self.filtro_antialiasing, 0), (self.blks2_selector_0_0_0_0, 1))
         self.connect((self.filtro_antialiasing, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.filtro_antialiasing, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.filtro_recuperador, 0), (self.blks2_selector_0_0_0, 1))
         self.connect((self.filtro_recuperador, 0), (self.qtgui_freq_sink_x_0, 3))
         self.connect((self.filtro_recuperador, 0), (self.qtgui_time_sink_x_0, 3))
+        self.connect((self.moduladora, 0), (self.blocks_multiply_const_vxx_0_0, 0))
+        self.connect((self.portadora, 0), (self.blocks_multiply_xx_1, 0))
+        self.connect((self.sen32, 0), (self.blks2_selector_0_1, 2))
+        self.connect((self.senoidal, 0), (self.blks2_selector_0_1, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
+
+    def get_mod_index0(self):
+        return self.mod_index0
+
+    def set_mod_index0(self, mod_index0):
+        self.mod_index0 = mod_index0
+        self.set_mod_index(self.mod_index0)
 
     def get_fs0(self):
         return self.fs0
@@ -467,6 +498,13 @@ class top_block(gr.top_block, Qt.QWidget):
         self.dutycycle0 = dutycycle0
         self.set_dutycycle(self.dutycycle0)
 
+    def get_amplitud0(self):
+        return self.amplitud0
+
+    def set_amplitud0(self, amplitud0):
+        self.amplitud0 = amplitud0
+        self.set_amplitud(self.amplitud0)
+
     def get_syh_on(self):
         return self.syh_on
 
@@ -497,16 +535,23 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.senoidal.set_sampling_freq(self.samp_rate)
         self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
         self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate)
+        self.portadora.set_sampling_freq(self.samp_rate)
+        self.moduladora.set_sampling_freq(self.samp_rate)
         self.filtro_recuperador.set_taps(firdes.low_pass(1, self.samp_rate, self.freq0*18, self.freq0*18*0.5, firdes.WIN_HAMMING, 6.76))
         self.filtro_antialiasing.set_taps(firdes.low_pass(1, self.samp_rate, self.freq0*18, self.freq0*18*0.5, firdes.WIN_HAMMING, 6.76))
+        self.diente_de_sierra.set_sampling_freq(self.samp_rate)
         self.blocks_throttle_0.set_sample_rate(self.samp_rate)
-        self.analog_sig_source_x_0_1_0_0_0.set_sampling_freq(self.samp_rate)
-        self.analog_sig_source_x_0_1_0_0.set_sampling_freq(self.samp_rate)
-        self.analog_sig_source_x_0_1_0.set_sampling_freq(self.samp_rate)
-        self.analog_sig_source_x_0_1.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
+
+    def get_mod_index(self):
+        return self.mod_index
+
+    def set_mod_index(self, mod_index):
+        self.mod_index = mod_index
+        self.blocks_multiply_const_vxx_0_0.set_k((self.mod_index, ))
 
     def get_input_signal(self):
         return self.input_signal
@@ -521,8 +566,8 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_input_freq(self, input_freq):
         self.input_freq = input_freq
-        self.analog_sig_source_x_0_1_0.set_frequency(self.input_freq)
-        self.analog_sig_source_x_0_1.set_frequency(self.input_freq)
+        self.senoidal.set_frequency(self.input_freq)
+        self.diente_de_sierra.set_frequency(self.input_freq)
 
     def get_fs(self):
         return self.fs
@@ -536,14 +581,14 @@ class top_block(gr.top_block, Qt.QWidget):
 
     def set_fpor(self, fpor):
         self.fpor = fpor
-        self.analog_sig_source_x_0_1_0_0.set_frequency(self.fpor)
+        self.portadora.set_frequency(self.fpor)
 
     def get_fmod(self):
         return self.fmod
 
     def set_fmod(self, fmod):
         self.fmod = fmod
-        self.analog_sig_source_x_0_1_0_0_0.set_frequency(self.fmod)
+        self.moduladora.set_frequency(self.fmod)
 
     def get_filtro_recuperador_on(self):
         return self.filtro_recuperador_on
@@ -568,6 +613,13 @@ class top_block(gr.top_block, Qt.QWidget):
         self.dutycycle = dutycycle
         self.blocks_threshold_ff_0.set_hi(self.dutycycle)
         self.blocks_threshold_ff_0.set_lo(self.dutycycle)
+
+    def get_amplitud(self):
+        return self.amplitud
+
+    def set_amplitud(self, amplitud):
+        self.amplitud = amplitud
+        self.blocks_multiply_const_vxx_0_0_0.set_k((self.amplitud, ))
 
 
 def main(top_block_cls=top_block, options=None):
