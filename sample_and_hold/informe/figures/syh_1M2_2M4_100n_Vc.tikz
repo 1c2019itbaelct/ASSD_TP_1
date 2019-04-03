@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+\begin{axis}[
+	xlabel = Tiempo (s),
+	ylabel = Tensi\'on (V),
+	width = \textwidth, 
+	cycle list name = color list,
+	ytick = {-5,...,5}]
+
+\addplot table [x=x-axis, y=3, col sep=comma] {\pgfpath../mediciones/sh_1m2_2m4_n.csv};
+
+\legend{Tensi\'on $C_H$}
+\end{axis}
+\end{tikzpicture}

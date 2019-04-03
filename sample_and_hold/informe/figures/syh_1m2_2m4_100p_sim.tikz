@@ -9,10 +9,10 @@
 	legend style={legend pos=south east}
 	]
 
-	\addplot table [x = time, y = V(signal_in), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100p_sim.txt};
-	\addplot table [x = time, y = V(signal_out), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100p_sim.txt};
-	\addplot table [x = time, y = V(vc), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100p_sim.txt};
-	\addplot table [x = time, y = V(logic), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100p_sim.txt};
+	\addplot table [x = time, y = V(signal_in), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100p_BW_3m_sim.txt};
+	\addplot table [x = time, y = V(signal_out), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100p_BW_3m_sim.txt};
+	\addplot table [x = time, y = V(vc), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100p_BW_3m_sim.txt};
+	\addplot table [x = time, y = V(logic), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100p_BW_3m_sim.txt};
 
 \legend{Se\~nal de entrada, Se\~nal de salida, Tensi\'on en $C_H$, SCSH}
 \end{axis}

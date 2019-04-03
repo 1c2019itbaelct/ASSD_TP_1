@@ -1,12 +1,5 @@
 \documentclass[../../ASSD_TP1_G7.tex]{subfiles}
 \begin{document}
-
-	\input{figures/syh_8k3_20k_100p_sim.tikz}
-	\input{figures/syh_8k3_20k_100n_sim.tikz}
-	\input{figures/syh_1m2_2m4_100p_sim.tikz}
-	\input{figures/syh_1m2_2m4_100n_sim.tikz}
-
-
 \chapter*{Sample and hold}
 El amplificador \textit{sample-and-hold}, o SHA, mantiene el valor de una se\~nal anal\'ogica por un determinado tiempo. Es frecuentemente utilizado para conversiones anal\'ogico-digital. Se utiliza el circuito integrado $LF398$. Por consigna, $FS = 2\cdot 5V = 10V$.
 \[\frac{1}{2}\text{LSB} = 0.5\cdot \frac{FS}{2^8} = \frac{10V}{2^9} \approx 20mV\]
@@ -16,7 +9,7 @@ El amplificador \textit{sample-and-hold}, o SHA, mantiene el valor de una se\~na
 \begin{itemize}
 	\item Siguiendo las recomendaciones del fabricante, se utiliza alimentaci\'on partida de $\pm 15V$.
 	\item El cambio entre el modo \textit{sample} y el modo \textit{hold} est\'a controlado por la se\~nal \textit{LOGIC REFERENCE} (conectada a tierra), y \textit{LOGIC}, proveniente del oscilador. \todo{insertar referencia a la secci\'on del oscilador} Si \textit{LOGIC - LOGIC REFERENCE} > 2.4V, se encuentra en modo \textit{sample}. En caso contrario, se encuentra en modo \textit{hold}.
-	\item La se\~nal anal\'ogica de entrada, o \textit{input}, tiene una amplitud m\'axima de 5V por consigna y una m\'imina XXXXXXXX kHz debido a las limitaciones de rango din\'amico del filtro. \todo{Completar con rango dinamico del filtro}
+	\item La se\~nal anal\'ogica de entrada, o \textit{input}, tiene una amplitud m\'axima de 1.5V debido a las limitaciones de rango din\'amico del filtro. \todo{Rechequear con el informe}
 \end{itemize}
 
 \section{Fuentes de error}
@@ -57,7 +50,7 @@ Al igual que $V_{OS}$, el hold step $V_{HS}$ tiene que ser menor que $\frac{1}{2
 	
 	\item\textbf{Acquisition time}
 	
-Como la resolucion es de 8bits, el error debe ser menor que $\frac{1}{2}$LSB = $\frac{FS}{2^9} = FS \cdot 0.02\% $. Por lo tanto, se utiliza la curva de 0.01\% de la hoja de datos (figura \ref{fig:syh_acquisition_time_datasheet}).
+Como la resolucion es de 8bits, el error debe ser menor que $\frac{1}{2}$LSB = $\frac{FS}{2^9} = FS \cdot 0.02\% $. Por lo tanto, se utiliza la curva de 0.01\% de la hoja de datos (figura \ref{fig:syh_acquisition_time_datasheet} ).
 
 Frecuencia de sampleo: $f_s = 100kHZ $ \\
 Periodo de sampleo: $T_s = \frac{1}{f_s} = 10\mu s$
@@ -112,54 +105,168 @@ Se elige un duty cycle de 50\%, lo cual deja $5 \mu s$ para el modo \textit{samp
 			\label{fig:syh_offset_correction_datasheet}
 		\end{figure}	
 		
-		En la figura \ref{fig:syh_offset_correction_datasheet} se observan dos circuitos de correcci\'on. El superior es para correcci\'on de $V_{OS}$
+		En la figura \ref{fig:syh_offset_correction_datasheet} se observan dos circuitos de correcci\'on. El superior es para correcci\'on de $V_{OS}$, mientras que inferior para la correcci\'on del \textit{hold step}. No se incluyen en el circuito dado que, como se mencion\'o anteriormente, la suma de estos errores es menor a $\frac{1}{2}LSB$.
 
-\section{Mediciones}
+\section{Simulaciones y mediciones. Comparaci\'on.}
+Basado en el diagrama de la figura \ref{fig:syh_block_diagram_datasheet} de la hoja de datos, se realizo la simulaci\'on de la figura \ref{fig:syh_lt_spice} en LTSpice para contrastar con las mediciones. No es esperable que las simulaciones coincidan en todos los aspectos con todas las mediciones, ya que en muchos aspectos es ideal y en otros no:
+
+\begin{itemize}
+	\item En la simulaci\'on, la llave anal\'ogica tiene una resistencia de $1\Omega$ cuando est\'a cerrada y de $1M\Omega$ cuando est\'a abierta. Estos datos fueron asumidos dado que en la hoja de datos no est\'an especificados. Se verific\'o que al aumentar la resistencia de la llave cuando estaba cerrada, la ca\'ida de tensi\'on en el capacitor en modo \textit{hold} disminu\'ia (en el \'unico caso en que se pudo apreciar fue en el de $C_H = 1pF$ y $f_{entrada} = 8.3KHz$, ya que en los dem\'as la ca\'ida era imperceptible. Tal como fue predicho en la tabla \ref{tab:syh_droop_rate}, \'este es el caso con mayor \textit{droop-rate}, aunque el valor visto experimentalmente es mucho mayor al esperado).
+	\item Al no contar con informaci\'on sobre los buffers del integrado, se usaron dos \textit{op-amps} con $A_{ol} = 100V/mV$ y $GBW = 3MHz$, e ideales en todos los dem\'as par\'ametros. En simulaciones iniciales, se parti\'o de $GBW=10MHz$. Se observ\'o que modificar este valor no manifestaba diferencias apreciables cuando $f_{entrada} = 8.3KHz$, pero s\'i cuando $f_{entrada} = 1.2MHz$. En este \'ultimo caso, al reducir $GBW$ se observa un aumento en el desfasaje entre la entrada y la salida. Comparando con la medici\'on, se estim\'o el valor $GBW = 3MHz$.
+ 
+	\item Los modelos de los diodos, resistencias, y del capacitor son ideales.
+	
+\end{itemize}
+
+
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[t]{0.45\linewidth}
+		\includegraphics[width=\textwidth]{figures/ltspice_sim.png}
+		\subcaption{Simulaci\'on ltSpice.}
+		\label{fig:syh_lt_spice}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\linewidth}
+		\includegraphics[width=\textwidth]{figures/block_diagram_datasheet.png}
+		\subcaption{Diagrama especificado por el fabricante usado como base de la simulaci\'on.}
+		\label{fig:syh_block_diagram_datasheet}
+	\end{subfigure}
+	\caption{\textit{Sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100nF$.}
+	\label{fig:syh_block_diagram_sim}
+\end{figure}
+
+
+Sabiendo el \textit{droop-rate} correspondiente a cada capacitor y $f_s$ se estima la p\'erdida de tensi\'on en cada periodo de \textit{hold}:
+\[ \text{Droop rate} \cdot \frac{0.5}{f_s} = \Delta V\]
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+	\hline 
+	 & $C_H = 100nF$ & $C_H = 100pF$ \\ 
+	\hline 
+	$f_s = 20KHz$ & $5.0nV $ & $7.5\mu V$ \\ 
+	\hline 
+	$f_s=2.4MHz$ & $42pV$ & $63nV$ \\ 
+	\hline 
+	\end{tabular}
+	\caption{Ca\'ida de tensi\'on en modo \textit{hold} seg\'un la hoja de datos}
+	\label{tab:syh_droop_rate}
+\end{table}
+
+
+\subsection{$f_{entrada}=1M2$, $C_H = 100nF$ } \label{ssec:syh_1m2_2m4_100n}
+Tanto en la simulaci\'on como en la medici\'on, la tensi\'on en $C_H$ no copia a la se\~nal de entrada (\ref{fig:syh_1m2_2m4_100n}). Esto se debe al pasabajos $RC$ de primer orden formado por $C_H$ y la resistencia de $300\Omega$ con frecuencia de corte $f_0 = \frac{1}{2\pi RC} = 5.3KHz \ll f_{entrada}$. \todo{comparar las tension $C_H$ medicion simulacion y explicar por que la azul medida es como es.}
 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}[t]{0.45\linewidth}
 		\input{figures/syh_1M2_2M4_100n.tikz}
 		\subcaption{Medici\'on.}
+		\label{fig:syh_1m2_2m4_100n_med}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\linewidth}
 		\input{figures/syh_1M2_2M4_100n_sim.tikz}
 		\subcaption{Simulaci\'on ltSpice.}
+		\label{fig:syh_1m2_2m4_100n_sim}
 	\end{subfigure}
 	\caption{\textit{Sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100nF$.}
+	\label{fig:syh_1m2_2m4_100n}
 \end{figure}
+
+\todo[inline]{Grafico de tension en el capacitor}
+
+%%\begin{figure}[H]
+%%	\centering
+%%	\begin{subfigure}[t]{0.45\linewidth}
+%%		\input{figures/syh_1M2_2M4_100n_Vc.tikz}
+%%		\subcaption{Medici\'on.}
+%%		\label{fig:syh_1m2_2m4_100n_Vc_med}
+%%	\end{subfigure}
+%%	\begin{subfigure}[t]{0.45\linewidth}
+%%		\input{figures/syh_1M2_2M4_100n_Vc_sim.tikz}
+%%		\subcaption{Simulaci\'on ltSpice.}
+%%		\label{fig:syh_1m2_2m4_100n_Vc_med}
+%%	\end{subfigure}
+%%	\caption{Detalle de la tensi\'on en $C_H$ en el \textit{sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100nF$.}
+%%	\label{fig:syh_1m2_2m4_100n_Vc}
+%%\end{figure}
+
+\subsection{$f_{entrada}=1M2$, $C_H = 100pF$ } \label{ssec:syh_1m2_2m4_100p}
+Como ya se mencion\'o, se observa un desfasaje entre la entrada y la salida, posiblemente causado por el ancho de banda limitado de los buffers. 
+Tambi\'en se observa en la medici\'on un sobrepico m\'as pronunciado en la transici\'on de modo \textit{sample} a modo \textit{hold} que en cualquiera de los otros casos. 
+Este efecto no pudo ser obtenido en la simulaci\'on. \todo{explicar esto, lo raro es que arranca antes del modo hold}. 
+A diferencia del caso de la secci\'on \ref{ssec:syh_1m2_2m4_100n}, la tensi\'on en $C_H$ sigue a la se\~nal de entrada
+
 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}[t]{0.45\linewidth}
 		\input{figures/syh_1M2_2M4_100p.tikz}
 		\subcaption{Medici\'on.}
+		\label{fig:syh_1m2_2m4_100p_med}	
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\linewidth}
 		\input{figures/syh_1M2_2M4_100p_sim.tikz}
 		\subcaption{Simulaci\'on ltSpice.}
+		\label{fig:syh_1m2_2m4_100p_med}
 	\end{subfigure}
 	\caption{\textit{Sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100pF$.}
+	\label{fig:syh_1m2_2m4_100p}
 \end{figure}
+
+\subsection{$f_{entrada}=8.3KHz$, $C_H = 100nF$ }
+Al igual que en el caso de la figura \ref{fig:syh_1m2_2m4_100n}, debido al filtro pasabajos $RC$ de primer orden, la tensi\'on en $C_H$ no puede seguir a la se\~nal de entrada en modo \textit{sample} (ver figura \ref{fig:syh_8k3_20k_100n}). Dado que el efecto se produce tambi\'en en la simulaci\'on y el modelo de capacitor usado es ideal, se puede descartar que esto sea causado por efecto de histeresis de capacitor. 
+
+%EL ANALISIS DE ABAJO ESTA MAL
+%Este fen\'omeno podr\'ia ser atribuido err\'oneamente al efecto de hist\'eresis en el capacitor debido a que se reduce al aplicar el circuito de correcci\'on de hist\'eresis propuesto en la hoja de datos (figura \ref{fig:syh_hysteresis_adjustment_datasheet}).
+
 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}[t]{0.45\linewidth}
 		\input{figures/syh_8k3_20k_100n.tikz}
 		\subcaption{Medici\'on.}
+		\label{fig:syh_8k3_20k_100n_med}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\linewidth}
 		\input{figures/syh_8k3_20k_100n_sim.tikz}
 		\subcaption{Simulaci\'on ltSpice.}
+		\label{fig:syh_8k3_20k_100n_sim}
 	\end{subfigure}
 	\caption{\textit{Sample and hold}. $f_{entrada} = 8.3KHz$, $f_{SCSH}=20KHz$, $C_H = 100nF$.}
+	\label{fig:syh_8k3_20k_100n}
 \end{figure}
+
+
+
+%\begin{figure}[H]
+%	\centering
+%	\begin{subfigure}[t]{0.45\linewidth}
+%		\includegraphics[width = \textwidth]{figures/hysteresis_adjust_datasheet.PNG}
+%		\subcaption{Circuito propuesto por el fabricante.}
+%		\label{fig:syh_hysteresis_adjustment_datasheet}
+%	\end{subfigure}
+%	\begin{subfigure}[t]{0.45\linewidth}
+%		\input{figures/syh_8k3_20k_100n_hyst_sim.tikz}
+%		\subcaption{Simulaci\'on ltSpice.}
+%		\label{fig:syh_8k3_20k_100n_hyst_sim}
+%	\end{subfigure}
+%	\caption{Circuito de correci\'on de hist\'eresis}
+%	\label{fig:syh_hysteresis_adjustment}
+%\end{figure}
+
+
+
+\subsection{$f_{entrada}=8.3KHz$, $C_H = 100pF$ }
+En este caso el efecto del \textit{droop-rate} es apreciable en la medici\'on y en la simulaci\'on. Se observan sobrepicos en la transici\'on de hold a sample, al igual que en el caso con el mismo $C_H$ y mayor frecuencia (secci\'on \ref{ssec:syh_1m2_2m4_100p}) (tambi\'en en la medici\'on y en la simulaci\'on). \'Esta es la \'unica de las cuatro mediciones en las que se observa que la tensi\'on en $C_H$ en modo \textit{sample} sigue correctamente a la se\~nal de enrada. Adem\'as, es la \'unica en la que existe una diferencia constante en modo \textit{sample} entre la se\~nal de entrada y la salida (efecto no presente en la simulaci\'on). No es probable que e deba a la tensi\'on de offset ($V_{OS}$), dado que es de $150mV$, y el valor especificado como t\'ipico por el fabricante es $1mV$.
 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}[t]{0.45\linewidth}
 		\input{figures/syh_8k3_20k_100p.tikz}
-		\subcaption{Medici\'on.}
+		\subcaption{Medici\'on. La tensi\'on en $C_H$ y la se\~nal de salida est\'an pr\'acticamente superpuestas.}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\linewidth}
 		\input{figures/syh_8k3_20k_100p_sim.tikz}
@@ -167,5 +274,6 @@ Se elige un duty cycle de 50\%, lo cual deja $5 \mu s$ para el modo \textit{samp
 	\end{subfigure}
 	\caption{\textit{Sample and hold}. $f_{entrada} = 8.3KHz$, $f_{SCSH}=20KHz$, $C_H = 100pF$.}
 \end{figure}
+
 
 \end{document}

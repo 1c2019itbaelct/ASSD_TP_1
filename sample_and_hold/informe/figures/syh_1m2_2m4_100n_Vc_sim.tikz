@@ -12,7 +12,7 @@
 	\addplot table [x = time, y = V(signal_out), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100n_BW_6m_sim.txt};
 	\addplot table [x = time, y = V(vc), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100n_BW_6m_sim.txt};
 	\addplot table [x = time, y = V(logic), col sep=tab] {\pgfpath../simulacion/syh_1m2_2m4_100n_BW_6m_sim.txt};
-
-\legend{Tensi\'on en $C_H$, SCSH}
+	
+\legend{Tensi\'on en $C_H$}
 \end{axis}
 \end{tikzpicture}
