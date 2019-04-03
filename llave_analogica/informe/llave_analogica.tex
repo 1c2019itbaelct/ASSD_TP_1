@@ -1,20 +1,32 @@
 \documentclass[../../ASSD_TP1_G7.tex]{subfiles}
 \begin{document}
 \chapter*{Llave anal\'ogica}
-La llave anal\'ogica que de utilizo es la 4066 por los siguientes motivos:
+Se analizaron dos llaves analógicas, la 4016 y la 4066. Algunas de las caracteristicas que se tuvieron en cuenta para la elección de dicho integrado fue, $R_{on}$, tiempo de propagación y corriente de fuga.
+\subsubsection*{Características de la 4066}
 \begin{itemize}
-\item Resistencia de ON de 125 \Omega
+\item Resistencia de ON de $80 \Omega$
+\item Tiempo de propagación de $7ns$
+\item Corriente de fuga en el order de los pico Ampers
+\end{itemize}
+\subsubsection*{Características de la 4016}
+\begin{itemize}
+\item Resistencia de on de $250\Omega$ 
+\item Tiempo de propagación de $15ns$
+\item Corriente de fuga del orden de los nano Ampers
 \end{itemize}
 
+Analizando estos items, se puede apreciar, claramente, que la 4066 es superior a la 4016, por lo que se utlizará la primera.
 \subsection*{Resistencia de pulldown}
 Cuando la llave analógica se abre, la salida de esta queda flotante, por lo tanto, hay que colocar una resistencia de pulldown que sea mucho mayor a la resistencia de ON de la a llave.
 
 Otro problema en la elección de la resistencia, es que las llaves anal\'ogicas, presentan a la salida una capacidad la cual, junto con la resistencia de pulldown forman un RC, haciendo que cuando se abre la llave, la se\~nal de salida tenga un retraso respecto de la de entrada y parte de esta se pierde.
 
-Para minimizar esto, hay que tener un tiempo de estalecimiento bajo, para esto la resistencia debe ser baja, pero no tan baja como para que sea comparable con Ron
+Para minimizar esto, hay que tener un tiempo de estalecimiento bajo, para esto la resistencia debe ser baja, pero no tan baja como para que sea comparable con $R_{on}$
 
 Por lo tanto, la resistencia de pulldown que se eligira no debera ser tan grande como para que el tiempo de establecimiento sea alto, ni tan chica como para que se pierda gran parte de la señal.
 
-Teniendo todo esto en cuenta lo mencionado ateriormente, se eligió una resistencia de pulldown de 5 k\Omega.
+Teniendo todo esto en cuenta lo mencionado ateriormente, se eligió una resistencia de pulldown de $5k\Omega$.
+\subsection*{Uso de la llave analógica}
+A la llave analógica se la alimentó con $\pm15V$ y como ya se mencionó anteriormente se le puso una resistencia de pulldown a la salida. Como el integrado que se usó tiene 4 llaves analógicas, algunos pines quedan flotantes, por lo tanto, a todos estos se los conecto a $-V_{cc}$, al igual que indica la hoja de datos.
 
 \end{document}
