@@ -6,7 +6,8 @@
 	cycle list name = color list,
 	ytick = {-5,...,6},
 %	grid=major,
-	legend style={legend pos=south east}
+	legend style={legend pos=south east},
+	ymax = 3.5
 	]
 
 	\addplot table [x = time, y = V(signal_in), col sep=tab] {\pgfpath../simulacion/syh_8k3_20k_100n_sim.txt};

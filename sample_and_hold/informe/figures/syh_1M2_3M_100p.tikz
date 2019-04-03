@@ -4,7 +4,9 @@
 	ylabel = Tensi\'on (V),
 	width = \textwidth, 
 	cycle list name = color list,
-	ytick = {-4,...,5}]
+	ytick = {-4,...,5},
+	ymax = 3.5
+	]
 \addplot table [x=x-axis, y=1, col sep=comma] {\pgfpath../simulacion/scope_12.csv};
 \addplot table [x=x-axis, y=2, col sep=comma] {\pgfpath../simulacion/scope_12.csv};
 \addplot table [x=x-axis, y=3, col sep=comma] {\pgfpath../simulacion/scope_12.csv};

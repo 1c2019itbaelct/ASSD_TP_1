@@ -129,7 +129,7 @@ Basado en el diagrama de la figura \ref{fig:syh_block_diagram_datasheet} de la h
 	\end{subfigure}
 	\begin{subfigure}[t]{0.45\linewidth}
 		\includegraphics[width=\textwidth]{figures/block_diagram_datasheet.png}
-		\subcaption{Diagrama especificado por el fabricante usado como base de la simulaci\'on.}
+		\subcaption{Diagrama especificado por el fabricante usado como base de la simulaci\'on. La arquitectura es lazo cerrado limitador.}
 		\label{fig:syh_block_diagram_datasheet}
 	\end{subfigure}
 	\caption{\textit{Sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100nF$.}
@@ -156,7 +156,8 @@ Sabiendo el \textit{droop-rate} correspondiente a cada capacitor y $f_s$ se esti
 \end{table}
 
 
-\subsection{$f_{entrada}=1M2$, $C_H = 100nF$ } \label{ssec:syh_1m2_2m4_100n}
+\subsection{$f_{entrada}=1M2$, $C_H = 100nF$ } 
+\label{ssec:syh_1m2_2m4_100n}
 Tanto en la simulaci\'on como en la medici\'on, la tensi\'on en $C_H$ no copia a la se\~nal de entrada (\ref{fig:syh_1m2_2m4_100n}). Esto se debe al pasabajos $RC$ de primer orden formado por $C_H$ y la resistencia de $300\Omega$ con frecuencia de corte $f_0 = \frac{1}{2\pi RC} = 5.3KHz \ll f_{entrada}$. \todo{comparar las tension $C_H$ medicion simulacion y explicar por que la azul medida es como es.}
 
 \begin{figure}[H]
@@ -210,7 +211,7 @@ A diferencia del caso de la secci\'on \ref{ssec:syh_1m2_2m4_100n}, la tensi\'on 
 	\begin{subfigure}[t]{0.45\linewidth}
 		\input{figures/syh_1M2_2M4_100p_sim.tikz}
 		\subcaption{Simulaci\'on ltSpice.}
-		\label{fig:syh_1m2_2m4_100p_med}
+		\label{fig:syh_1m2_2m4_100p_sim}
 	\end{subfigure}
 	\caption{\textit{Sample and hold}. $f_{entrada} = 1M2$, $f_{SCSH}=2M4$, $C_H = 100pF$.}
 	\label{fig:syh_1m2_2m4_100p}
@@ -275,5 +276,37 @@ En este caso el efecto del \textit{droop-rate} es apreciable en la medici\'on y 
 	\caption{\textit{Sample and hold}. $f_{entrada} = 8.3KHz$, $f_{SCSH}=20KHz$, $C_H = 100pF$.}
 \end{figure}
 
+\section{Comparaci\'on con integrado \textit{sample and hold AD585}}
 
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline 
+ & LF398 & AD585 \\ 
+\hline 
+\hline
+Arquitectura & Lazo cerrado limitador & Integrador\footnotemark \\ 
+\hline 
+$V_{OS}$ & $10mV$ m\'ax. ($C_H = 10nF$) & $5mV$ m\'ax. ($C_H:$ interno) \\ 
+\hline 
+\textit{Hold step} & $2.5mV$ m\'ax. ($C_H = 10nF$) & $3mV$ m\'ax. ($C_H:$ interno) \\ 
+\hline 
+\textit{Droop rate} & \begin{tabular}{c} $0.1V/s$ m\'ax. ($C_H=10nF$)\\ $1V/s$ m\'ax. ($C_H=1nF$)\end{tabular} &  $1V/s$ m\'ax. ($C_H:$ interno)\\ 
+\hline 
+Tiempo adquisici\'on (0.01\%)& \begin{tabular}{c} $20 \mu s$ ($C_H=10nF$)\\ $4 \mu s$ ($C_H=1nF$)\end{tabular} & $5 \mu s$ m\'ax ($C_H$: interno) \\ 
+\hline 
+Capacitor interno & No & S\'i ($100pF$) \\ 
+\hline 
+\begin{tabular}{c}
+Terminal para circuito \\ de compensaci\'on de $V_{OS}$
+\end{tabular} & S\'i & S\'i \\ 
+\hline 
+Ajuste de ganancia & No & S\'i\footnotemark \\ 
+\hline 
+Precio & $1.66US\$ $ & $120 US\$ $ \\ 
+\hline 
+\end{tabular} 
+\end{center}
+\footnotetext{Permite diferentes conexiones, tanto a lazo cerrado como a lazo abierto. Esto le da al usuario m\'as flexibilidad.}
+\footnotetext{Esto es posible dado que el integrado permite el uso de una red de feedback externa.}
 \end{document}
