@@ -36,27 +36,27 @@ Las mediciones se realizaron para el caso de $m=2$.
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulación}
-{\includegraphics[width=0.45\textwidth]{figures/simpto_8_llave_52,8khz_espectro.png}}
+{\includegraphics[width=0.6\textwidth]{figures/simpto_8_llave_52,8khz_espectro.png}}
 \subcaptionbox{Medición}
-{\includegraphics[width=0.45\textwidth]{figures/pto_8_llave_52,8khz_espectro.png}}
+{\includegraphics[width=0.32\textwidth]{figures/pto_8_llave_52,8khz_espectro.png}}
 \caption{Frecuencia sampleo mínima(52.8KHz), simulación y medición}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulacion}
-{\includegraphics[width=0.45\textwidth]{figures/simpto_8_llave_58,8_espectro.png}}
+{\includegraphics[width=0.6\textwidth]{figures/simpto_8_llave_58,8_espectro.png}}
 \subcaptionbox{Medicion}
-{\includegraphics[width=0.45\textwidth]{figures/pto_8_llave_58,8_espectro.png}}
+{\includegraphics[width=0.32\textwidth]{figures/pto_8_llave_58,8_espectro.png}}
 \caption{Frecuencia sampleo media(58.8KHz), simulación y medición}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulación}
-{\includegraphics[width=0.45\textwidth]{figures/simpto_8_llave_64,8khz_espectro.png}}
+{\includegraphics[width=0.6\textwidth]{figures/simpto_8_llave_64,8khz_espectro.png}}
 \subcaptionbox{Medición}
-{\includegraphics[width=0.45\textwidth]{figures/pto_8_llave_64,8khz_espectro.png}}
+{\includegraphics[width=0.32\textwidth]{figures/pto_8_llave_64,8khz_espectro.png}}
 \caption{Frecuencia sampleo maxima(64.8KHz), simulación y medición}
 \end{figure}
 
@@ -67,31 +67,40 @@ Las mediciones se realizaron para el caso de $m=2$.
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulación}
-{\includegraphics[width=0.45\textwidth]{figures/simpto_8_syh_52,8_espectro.png}}
+{\includegraphics[width=0.6\textwidth]{figures/simpto_8_syh_52,8_espectro.png}}
 \subcaptionbox{Medición}
-{\includegraphics[width=0.45\textwidth]{figures/pto_8_syh_52,8_espectro.png}}
+{\includegraphics[width=0.32\textwidth]{figures/pto_8_syh_52,8_espectro.png}}
 \caption{Frecuencia sampleo mínima(52.8KHz), simulación y medición}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulacion}
-{\includegraphics[width=0.45\textwidth]{figures/simpto_8_syh_58,8_espectro.png}}
+{\includegraphics[width=0.6\textwidth]{figures/simpto_8_syh_58,8_espectro.png}}
 \subcaptionbox{Medicion}
-{\includegraphics[width=0.45\textwidth]{figures/pto_8_syh_58,8_espectro.png}}
+{\includegraphics[width=0.32\textwidth]{figures/pto_8_syh_58,8_espectro.png}}
 \caption{Frecuencia sampleo media(58.8KHz), simulación y medición}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulación}
-{\includegraphics[width=0.45\textwidth]{figures/simpto_8_syh_64,8_espectro.png}}
+{\includegraphics[width=0.6\textwidth]{figures/simpto_8_syh_64,8_espectro.png}}
 \subcaptionbox{Medición}
-{\includegraphics[width=0.45\textwidth]{figures/pto_8_syh_64,8_espectro.png}}
+{\includegraphics[width=0.32\textwidth]{figures/pto_8_syh_64,8_espectro.png}}
 \caption{Frecuencia sampleo maxima(64.8KHz), simulación y medición}
 \end{figure}
 
+\subsection*{Recuperación de la se\~nal}
+Se intento recuperar la se\~nal proveniente de la llave analógica, para ello se conecto el filtro recuperador. Se obtuvo la siguiente medición:
 
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=0.7\textwidth]{figures/lla_8_1.png}
+  \caption{Recuperación de la se\~nal. Canal amarillo entrada, canal verde salida }
+  
+\end{figure}
+Tal como se observa en la imagen, no fue posible la recuperación, esto se deve a que el filtro recuperador es un pasabajos y no un pasa banda. Entonces no se filtran las repeticiones del espectro.
 
 
 \end{document}
