@@ -111,10 +111,41 @@ La figura \ref{fig:ej}, muestra el funcionamiento del comparador para variar el 
 DC=\left[ 1 - \frac{Vcc \frac{R_ck + Rb}{R_a + R_c + R_b}}{V_{max}} \right] 100
 \end{equation}
 
-\subsubsection*{Elección de componentes}
-
-
 \subsection*{Características del oscilador}
+El oscilador posee las siguientes carcateristicas:
+\begin{itemize}
+  \item Frecuencia máxima $300KHz$
+  \item Frecuencia mínima $1KHz$
+  \item Duty cycle mínimo 4\%
+  \item Duty cycle máximo 98\%
+  \item $v_o$ mínimo -15v
+  \item $v_o$ máximo 15v
+
+\end{itemize}
+Se midió el la salida del generador:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{figures/scope5.png}
+\caption{Frecuencia de 50KHz y duty cycle 50\%. Se\~nal verde tension en el capacitor, la amarilla salida del comparador}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{figures/scope6.png}
+\caption{Frecuencia de 50KHz y duty cycle 5\%. Se\~nal verde tension en el capacitor, la amarilla salida del comparador}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{figures/scope4.png}
+\caption{Frecuencia de 50KHz y duty cycle 92\%. Se\~nal verde tension en el capacitor, la amarilla salida del comparador}
+\end{figure}
+
+
+
+
+
 \subsection*{Consideraciones al utilizar se\~nales analógicas y digitales en un mismo circuito }
 \par En los circuitos donde hay se\~nales analógicas y digitales mezcladas hay que tener especial consideración en la influencia de las se\~nales digitales en las analógicas. Esto se debe a que en los circuitos digitales existen umbrales para discernir el estado de una se\~nal. 
 \par Los principales efectos que se pueden manifestar son\footnote{Grounding in mixed-signal systems demystified, Part 1. (2019). [ebook] Disponible en: http://www.ti.com/lit/an/slyt499/slyt499.pdf [Accedido 23 Mar. 2019].}:
