@@ -46,15 +46,15 @@ $X_{b}$; salida con $X_{c}$}
 \end{figure}
 
 Para la señal $X_{a}$, los valores óptimos que se obtuvieron fueron:
-$f_{s}:[76,3;313](kHz)$midiendo en el máximo de ese intervalo, $DC=48.5\%,$$A:(0;2]$(Vpp)
+$f_{s}:[76,3;313](kHz)$midiendo en el máximo de ese intervalo, $DC=48.5\%,$$A:(0;1]$(Vpp)
 midiendo para $A=1V_{pp}$.
 
 Para la señal $X_{b}$, los valores óptimos obtenidos fueron: $f_{s}:[91;313](kHz)$midiendo
-en el máximo de ese intervalo, $DC=48.8\%,$$A:(0;2]$(Vpp) midiendo
+en el máximo de ese intervalo, $DC=48.8\%,$$A:(0;1]$(Vpp) midiendo
 para $A=1V_{pp}$.
 
 Para la señal $X_{c}$, los valores óptimos obtenidos fueron: $f_{s}:[80;300](kHz)$midiendo
-en la frecuencia de 140kHz perteneciente a ese intervalo, $DC=49.8\%,$$A:(0;2]$(Vpp)
+en la frecuencia de 140kHz perteneciente a ese intervalo, $DC=49.8\%,$$A:(0;1]$(Vpp)
 midiendo para $A=1V_{pp}$.
 
 Para realizar un análisis más completo, hemos realizado una simulación
@@ -79,8 +79,8 @@ A primera vista, podemos ver como se aprecian ciertas diferencias
 entre el modelo teórico y el resultante en la práctica. Primero, observamos
 como en el modelo teórico, la señal parece tener un ripple que el
 osciloscopio no muestra, esto se debe a que en efecto en el modelo
-teórico la recuperación de la señal está dada por funciones $\delta$,
-mientras que en la placa se obtienen funciones sincs lo que hace que
+teórico la recuperación de la señal se modeliza de manera ideal y por ende está dada por funciones $\delta$,
+mientras que en la medición no es posible obtener dichas funciones, por lo que a la hora de recuperar la función vamos a realizarlo a través de funciones sincs lo que hace que
 aparezcan más valores.
 
 \subsection{Cambios en la $f_{in}$ y en la $f_{s}$}
@@ -113,7 +113,7 @@ Los resultados se ven plasmados en la siguiente image:
 
 Si contrastamos con las simulaciones pertinentes, las cuales se muestran
 a continuación, no se observan diferencias significativas, más alla
-de la intensificación del ripple en la salida, y de la atenuación
+de la intensificación del ripple en la salida explicada anteriormente en la sección del filtro; y de la atenuación
 pertinente que sufre cada señal.
 
 \begin{figure}[H]
@@ -155,7 +155,7 @@ lo cierto es que en ambos casos la señal saliente resulta nula para
 el caso de la senoidal, e igualmente para el caso de la función rampa
 con la salvedad de que en vista de que el contenido armónico es mayor,
 no es exactamente cero lo que se aprecia, sino que se tiene algo de
-ruido a la salida.
+ruido a la salida. Esto se debe principalmente a que el filtro tanto de antialiasing como el recuperador atenúan la señal que ingresa, por lo que el espectro saliente y recuperado resulta ser prácticamente nulo.
 
 \begin{figure}[H]
 
@@ -193,7 +193,7 @@ A la hora de contrastar con la simulación, notamos que se obtiene
 la misma forma de la señal en ambos casos, solo que en la simulación
 la señal queda definida positivamente, a diferencia de lo que ocurre
 en el osciloscopio. Esto se debe a que la simulación no contempla
-el desfasaje que el filtro le inyecta a las distintas frecuencias.
+el desfasaje que el filtro real le inyecta a las distintas frecuencias, según su respuesta en frecuencia.
 
 \subsection{Aliasing}
 
@@ -281,8 +281,8 @@ imagenes:
 Podemos ver como lo obtenido en las mediciones no discrepan con las
 simulaciones. Si acaso podemos destacar que para la función rampa
 simulada no se aprecia un ripple montado sobre sí, lo cual puede ser
-explicado desde las falencias de nuestro filtro mencionadas previamente
-en este trabajo práctico.
+explicado no solo desde las falencias de nuestro filtro mencionadas previamente
+en este trabajo práctico sino también por el contenido armónico que sale del mismo el cual lógicamente es menor.
 
 \subsection{Cambios en la $f_{in}$ y en la $f_{s}$}
 
@@ -391,7 +391,7 @@ Ahora simulando el caso en la GUI, obtenemos:
 
 Nuevamente, al igual que en el insciso en el cual usamos la llave
 analógica, la forma de la función resultante es la misma con la salvedad
-que posee otro desfasaje.
+que posee otro desfasaje puesto que la simulación no contempla los desfasajes de la respuesta en frecuencia del filtro.
 
 \subsection{Aliasing}
 
