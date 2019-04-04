@@ -10,7 +10,7 @@ x_{s}(t)=\left[ x(t)\left( \sum_{i=-\infty}^{\infty} \delta(t - i T_s) \right) \
 \end{equation}
 
 \par Donde $x(t)$ se\~nal antes y $x_{s}(t)$ es la se\~nal después de la llave analógica y el sample and hold.$T_s$ es el periodo de sampleo y $\tau$ es el ancho de la ventana del sample and hold.
-\par Aplicando la transformada de Fourier a la esxpresion de $x_{s}$ se obtiene su espectro.
+\par Aplicando la transformada de Fourier a la expresión de $x_{s}$ se obtiene su espectro.
 
 \begin{equation}
 X_{s}(f)=\left( \sum_{k=-\infty}^{\infty} X(f - k f _s) \right) f _s \tau sinc(f \tau) \label{eq:espectroRemuestreo}
@@ -53,21 +53,25 @@ Se utilizo un duty cycle de 40\% y una frecuencia se sampleo de 100KHz.
 
 
 \subsection*{Sample and hold y llave analógica, sin filtro recuperador}
+
 \begin{figure}[H]
 \centering
-\subcaptionbox{Simulacion}
-{\includegraphics[width=0.45\textwidth]{figures/syh_ptp_7re.png}}
-\subcaptionbox{Medicion}
-{\includegraphics[width=0.45\textwidth]{figures/syh_ptp_7re.png}}
-\caption{Remuestreo de la se\~nal con sample and hold y llave analógica}
+\subcaptionbox{Espectro\label{fig:espsinfr}}
+
+{\includegraphics[width=0.45\textwidth]{figures/sinfr.jpeg}} 
+\subcaptionbox{En el tiempo}
+{\includegraphics[width=0.45\textwidth]{figures/scope2.png}}
+\caption{Remuestreo de la se\~nal con sample and hold y llave analógica, con frecuencia de sampleo 25 KHz}
 \end{figure}
+
+En la figura \ref{fig:espsinfr}, se observan repeticiones del espectro. Este fenómeno se debe al tipo de muestreo. El resultado coincide con lo predicho por la ecuación \ref{eq:espectroRemuestreo}, el espectro repetido y modulado por un sinc.
 
 \subsection*{Sample and hold y llave analógica, con filtro recuperador}
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulacion}
 {\includegraphics[width=0.45\textwidth]{figures/simlyh_pto_7_3.png}}
-\subcaptionbox{Medicion}
+\subcaptionbox{Medicion\label{fig:seveok}}
 {\includegraphics[width=0.45\textwidth]{figures/lyh_pto_7_3.png}}
 \caption{Remuestreo de la se\~nal con sample and hold y llave analógica, despues del filtro recuperador}
 \end{figure}
@@ -80,5 +84,19 @@ Se utilizo un duty cycle de 40\% y una frecuencia se sampleo de 100KHz.
 {\includegraphics[width=0.45\textwidth]{figures/syh_llave.jpeg}}
 \caption{Espectro de la se\~nal despues del sample and hold}
 \end{figure}
+Como se observa en la mediciones del espectro, no hay repetición del espectro de la se\~nal de salida. Esto se debe a la alta frecuencia de sampleo utilizada. Para poder observar las repeticiones del espectro se realizaron las mismas mediciones con una frecuencia de sampleo de 25 KHz.
+
+\begin{figure}[H]
+\centering
+\subcaptionbox{Espectro\label{fig:espconfr}}
+
+{\includegraphics[width=0.45\textwidth]{figures/confr.jpeg}} 
+\subcaptionbox{En el tiempo}
+{\includegraphics[width=0.45\textwidth]{figures/scope1.png}}
+\caption{Remuestreo de la se\~nal con sample and hold , llave analógica y filtro recuperador, con frecuencia de sampleo 25 KHz}
+\end{figure}
+
+La se\~nal reuperada (figura \ref{fig:seveok}),a pesar de cumplir nyquist, no es la misma que la recuperada con frecuencia de sampleo 100KHz(figura \ref{fig:seveok}). Esto se debe a que la frecuencia de atenuación del filtro recuperador se encuentra en 68KHz, entonces hay alliasing, tal como se observa en la figura \ref{fig:espconfr}.
+
 
 \end{document}
