@@ -31,16 +31,28 @@ X_c=A_{Max}[\frac{1}{2}cos(2\pi (1.8 f_{in})t)+cos(2\pi (2 f_{in})t)+cos(2\pi (2
 Donde $f_{in}=45KHz$.
 
 \subsection*{Sample and hold}
+Se utilizo un duty cycle de 40\% y una frecuencia se sampleo de 100KHz.
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulacion}
-{\includegraphics[width=0.45\textwidth]{figures/syh_ptp_7re.png}}
+{\includegraphics[width=0.5\textwidth]{figures/simsyh_pto_7_4.png}}
 \subcaptionbox{Medicion}
-{\includegraphics[width=0.45\textwidth]{figures/syh_ptp_7re.png}}
+{\includegraphics[width=0.45\textwidth]{figures/syh_pto_7_4.png}}
 \caption{Remuestreo de la se\~nal con sample and hold}
 \end{figure}
 
-\subsection*{Sample and hold y llave analógica}
+\begin{figure}[H]
+\centering
+\subcaptionbox{Simulacion}
+{\includegraphics[width=0.5\textwidth]{figures/simespectosyh.PNG}}
+\subcaptionbox{Medicion}
+{\includegraphics[width=0.45\textwidth]{figures/syh.jpeg}}
+\caption{Espectro de la se\~nal despues del sample and hold}
+\end{figure}
+
+
+
+\subsection*{Sample and hold y llave analógica, sin filtro recuperador}
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulacion}
@@ -50,7 +62,23 @@ Donde $f_{in}=45KHz$.
 \caption{Remuestreo de la se\~nal con sample and hold y llave analógica}
 \end{figure}
 
+\subsection*{Sample and hold y llave analógica, con filtro recuperador}
+\begin{figure}[H]
+\centering
+\subcaptionbox{Simulacion}
+{\includegraphics[width=0.45\textwidth]{figures/simlyh_pto_7_3.png}}
+\subcaptionbox{Medicion}
+{\includegraphics[width=0.45\textwidth]{figures/lyh_pto_7_3.png}}
+\caption{Remuestreo de la se\~nal con sample and hold y llave analógica, despues del filtro recuperador}
+\end{figure}
 
-
+\begin{figure}[H]
+\centering
+\subcaptionbox{Simulacion}
+{\includegraphics[width=0.5\textwidth]{figures/llsyhsimesp.PNG}}
+\subcaptionbox{Medicion}
+{\includegraphics[width=0.45\textwidth]{figures/syh_llave.jpeg}}
+\caption{Espectro de la se\~nal despues del sample and hold}
+\end{figure}
 
 \end{document}
