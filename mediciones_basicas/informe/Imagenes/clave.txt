@@ -1,0 +1,11 @@
+LLAVE ANALOGICA
+ej_6_.csv/.png: 6a 3/2 sen llave analogica
+ej_6_b_.csv/.png: 6b1 3/2 sen llave analogica
+ej_6_b_2.csv/.png: 6b2 3/2 sen llave analogica
+ej_6_d.csv/.png 6d 3/2 sen llave analogica (mal)
+ej_6_d_2.csv/.png 6d 3/2 sen llave analogica (bien)
+SAMPLE AND HOLD
+ej_6_a_syh.csv/.png: 6a 3/2 sen syh
+ej_6_b_syh.csv/.png: 6b1 3/2 sen syh
+ej_6_b_syh2.csv/.png: 6b2 3/2 sen syh
+ej_6_d_syh.csv/.png: 6d 3/2 sen syh
