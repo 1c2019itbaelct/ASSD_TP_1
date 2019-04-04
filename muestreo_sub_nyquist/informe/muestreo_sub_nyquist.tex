@@ -29,10 +29,19 @@ $m$ & $f_{sMIN}$ & $f_{sMAX}$  \\
 \end{center}
 \end{table}
 Para $m$ mayores, $f_{sMIN}>f_{sMAX}$.
+
 \section*{Mediciones}
 Las mediciones se realizaron para el caso de $m=2$.
-\subsection*{Llave Analógica}
 
+Utilizando la frecuencia de sampleo m\'inima (figuras \ref{fig:subnyq_lla_fmin} y \ref{fig:subnyq_syh_fmin}), se observa que las dos r\'eplicas del espectro original (en verde y rojo) est\'an lado a lado. El pico de frecuencia m\'axima de la repetici\'on verde se encuentra superpuesto con el pico de frecuencia m\'inima de la repetici\'on roja, por lo que no se pueden diferenciar en el diagrama espectral. En consecuencia, entre ambas repeticiones deber\'ian medirse 5 picos. 
+
+Con la frecuencia de sampleo media (figuras \ref{fig:subnyq_lla_fmed} y \ref{fig:subnyq_syh_fmed}), tanto el espectro original (en celeste) como las dos repeticiones (en verde y rojo) se encuentran separados, por lo que no hay picos superpuestos. En consecuencia, 9 picos deber\'ian ser visibles. 
+
+Si la frecuencia de sampleo es la m\'axima, (figuras \ref{fig:subnyq_syh_fmax} y \ref{fig:subnyq_lla_fmax}), el pico superior de la repetici\'on roja coincide con el pico inferior de el espectro original.
+
+
+
+\subsection*{Llave Analógica}
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulación}
@@ -40,6 +49,7 @@ Las mediciones se realizaron para el caso de $m=2$.
 \subcaptionbox{Medición}
 {\includegraphics[width=0.32\textwidth]{figures/pto_8_llave_52,8khz_espectro.png}}
 \caption{Frecuencia sampleo mínima(52.8KHz), simulación y medición}
+\label{fig:subnyq_lla_fmin}
 \end{figure}
 
 \begin{figure}[H]
@@ -49,6 +59,7 @@ Las mediciones se realizaron para el caso de $m=2$.
 \subcaptionbox{Medicion}
 {\includegraphics[width=0.32\textwidth]{figures/pto_8_llave_58,8_espectro.png}}
 \caption{Frecuencia sampleo media(58.8KHz), simulación y medición}
+\label{fig:subnyq_lla_fmed}
 \end{figure}
 
 \begin{figure}[H]
@@ -58,12 +69,11 @@ Las mediciones se realizaron para el caso de $m=2$.
 \subcaptionbox{Medición}
 {\includegraphics[width=0.32\textwidth]{figures/pto_8_llave_64,8khz_espectro.png}}
 \caption{Frecuencia sampleo maxima(64.8KHz), simulación y medición}
+\label{fig:subnyq_lla_fmax}
 \end{figure}
 
 
 \subsection*{Sample and Hold}
-
-
 \begin{figure}[H]
 \centering
 \subcaptionbox{Simulación}
@@ -71,6 +81,7 @@ Las mediciones se realizaron para el caso de $m=2$.
 \subcaptionbox{Medición}
 {\includegraphics[width=0.32\textwidth]{figures/pto_8_syh_52,8_espectro.png}}
 \caption{Frecuencia sampleo mínima(52.8KHz), simulación y medición}
+\label{fig:subnyq_syh_fmin}
 \end{figure}
 
 \begin{figure}[H]
@@ -80,6 +91,7 @@ Las mediciones se realizaron para el caso de $m=2$.
 \subcaptionbox{Medicion}
 {\includegraphics[width=0.32\textwidth]{figures/pto_8_syh_58,8_espectro.png}}
 \caption{Frecuencia sampleo media(58.8KHz), simulación y medición}
+\label{fig:subnyq_syh_fmed}
 \end{figure}
 
 \begin{figure}[H]
@@ -89,6 +101,7 @@ Las mediciones se realizaron para el caso de $m=2$.
 \subcaptionbox{Medición}
 {\includegraphics[width=0.32\textwidth]{figures/pto_8_syh_64,8_espectro.png}}
 \caption{Frecuencia sampleo maxima(64.8KHz), simulación y medición}
+\label{fig:subnyq_syh_fmax}
 \end{figure}
 
 \subsection*{Recuperación de la se\~nal}
